@@ -1,0 +1,4 @@
+tms_tasks_manager:
+    resource: "@TMSTasksManagerBundle/Resources/config/routing.yml"
+    prefix:   /
+
