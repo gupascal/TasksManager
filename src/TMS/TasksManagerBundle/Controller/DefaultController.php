@@ -6,8 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction($userid)
     {
-        return $this->render('TMSTasksManagerBundle:Default:index.html.twig', array('name' => $name));
+		$tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findAllRunningTasksOrderedByDueDate($userid);
+		
+        return $this->render('TMSTasksManagerBundle:Default:index.html.twig', array('userid' => $userid, 'tasks' => $tasks));
+    }
+	
+	public function showAction($userid, $taskid)
+    {
+		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->find($taskid, $userid);
+		
+        return $this->render('TMSTasksManagerBundle:Default:show.html.twig', array('userid' => $userid, 'tasks' => $task));
     }
 }
