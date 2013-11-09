@@ -1,3 +1,7 @@
+tms_users:
+    resource: "@TMSUsersBundle/Resources/config/routing.yml"
+    prefix:   /
+
 tms_tasks_manager:
     resource: "@TMSTasksManagerBundle/Resources/config/routing.yml"
     prefix:   /

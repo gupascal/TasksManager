@@ -1,0 +1,7 @@
+parameters:
+#    tms_users.example.class: TMS\UsersBundle\Example
+
+services:
+#    tms_users.example:
+#        class: %tms_users.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
