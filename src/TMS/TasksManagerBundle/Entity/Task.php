@@ -46,6 +46,12 @@ class Task
 	 */
 	protected $date_completed;
 	
+	/**
+     * @ORM\ManyToOne(targetEntity="TMS\UsersBundle\Entity\User", inversedBy="tasks")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+	 protected $user;
+	
 
     /**
      * Get id
@@ -239,5 +245,51 @@ class Task
     public function getDateCompleted()
     {
         return $this->date_completed;
+    }
+
+    /**
+     * Set user_id
+     *
+     * @param \TMS\TasksManagerBundle\Entity\User $userId
+     * @return Task
+     */
+    public function setUserId(\TMS\TasksManagerBundle\Entity\User $userId = null)
+    {
+        $this->user_id = $userId;
+    
+        return $this;
+    }
+
+    /**
+     * Get user_id
+     *
+     * @return \TMS\TasksManagerBundle\Entity\User 
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \TMS\TasksManagerBundle\Entity\User $user
+     * @return Task
+     */
+    public function setUser(\TMS\TasksManagerBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \TMS\TasksManagerBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
