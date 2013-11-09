@@ -6,13 +6,13 @@
 {% block body %}
 	<header>
 		<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
-		<p>{{ userid }}</p>
-		{#<a href="{{ path('Default', { 'userid': 'xxx' }) }}">Manage your profil</a>#}
+		<p>{{ username }}</p>
+		{#<a href="{{ path('Default', { 'username': 'xxx' }) }}">Manage your profil</a>#}
 	</header>
 	
 	{% block content %}
 		<div id="main">
-			<h1>Hello {{ userid }}!</h1>
+			<h1>Hello {{ username }}!</h1>
 		</div>
 	{% endblock %}
 	

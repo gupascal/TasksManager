@@ -6,17 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($userid)
+    public function indexAction($username)
     {
-		$tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findAllRunningTasksOrderedByDueDate($userid);
+		$tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findAllRunningTasksOrderedByDueDate($username);
 		
-        return $this->render('TMSTasksManagerBundle:Default:index.html.twig', array('userid' => $userid, 'tasks' => $tasks));
+        return $this->render('TMSTasksManagerBundle:Default:index.html.twig', array('username' => $username, 'tasks' => $tasks));
     }
 	
-	public function showAction($userid, $taskid)
+	public function showAction($username, $taskid)
     {
-		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->find($taskid, $userid);
+		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->find($taskid, $username);
 		
-        return $this->render('TMSTasksManagerBundle:Default:show.html.twig', array('userid' => $userid, 'tasks' => $task));
+        return $this->render('TMSTasksManagerBundle:Default:show.html.twig', array('username' => $username, 'tasks' => $task));
     }
 }

@@ -12,28 +12,31 @@ use Doctrine\ORM\EntityRepository;
  */
 class TaskRepository extends EntityRepository
 {
-	private function whereUserIs(\Doctrine\ORM\QueryBuilder $qb, $userid = null)
+	private function whereUserIs(\Doctrine\ORM\QueryBuilder $qb, $username = null)
 	{
-		if ($userid !== null) {
+		/*
+		$iduser;
+		if ($username !== null) {
 			$qb->andWhere('t.id_user = :iduser')
-				->setParameter('iduser', $userid);
+				->setParameter('iduser', $iduser);
 		}
+		*/
 	}
 
-	public function findAllRunningTasksOrderedByDueDate($userid = null)
+	public function findAllRunningTasksOrderedByDueDate($username = null)
 	{
 		$qb = $this->createQueryBuilder('t');
-		//$this->whereUserIs($qb, $userid);
+		//$this->whereUserIs($qb, $username);
 		return $qb->andWhere('t.date_completed IS NOT NULL')
 					->orderBy('t.due_date', 'ASC')
 					->getQuery()
 					->getResult();
 	}
 	
-	public function find($taskid, $userid = null)
+	public function find($taskid, $username = null)
 	{
 		$qb = $this->createQueryBuilder('t');
-		//$this->whereUserIs($qb, $userid);
+		//$this->whereUserIs($qb, $username);
 		return $qb->where('t.id == :id')
 						->setParameter('id', $taskid)
 						->getQuery()
