@@ -37,9 +37,21 @@ class TaskRepository extends EntityRepository
 	{
 		$qb = $this->createQueryBuilder('t');
 		//$this->whereUserIs($qb, $username);
-		return $qb->where('t.id == :id')
+		return $qb->where('t.id = :id')
 						->setParameter('id', $taskid)
 						->getQuery()
-						->getResult();
+						->getOneOrNullResult();
+	}
+	
+	public function findNextTasks($limit)
+	{
+		$qb = $this->createQueryBuilder('t');
+		//$this->whereUserIs($qb, $username);
+		return $qb->andWhere('t.date_completed IS NOT NULL')
+					->orderBy('t.due_date', 'ASC')
+					//->setFirstResult($offset)
+					->setMaxResults($limit)
+					->getQuery()
+					->getResult();
 	}
 }

@@ -17,6 +17,11 @@ class DefaultController extends Controller
     {
 		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->find($taskid, $username);
 		
+		// Redirect if the task doesn't exist
+		if ($task === null) {
+			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage', array('username' => $username)));
+		}
+		
         return $this->render('TMSTasksManagerBundle:Default:show.html.twig', array('username' => $username, 'tasks' => $task));
     }
 }
