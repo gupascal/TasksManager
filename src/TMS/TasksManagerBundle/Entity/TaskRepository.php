@@ -14,13 +14,11 @@ class TaskRepository extends EntityRepository
 {
 	private function whereUserIs(\Doctrine\ORM\QueryBuilder $qb, $username = null)
 	{
-		/*
-		$iduser;
 		if ($username !== null) {
-			$qb->andWhere('t.id_user = :iduser')
-				->setParameter('iduser', $iduser);
+			$qb->innerJoin('TMS\UsersBundle\Entity\User', 'u', 'WITH', 't.user_id = u.id')
+				->andWhere('u.username = :username')
+				->setParameter('username', $username);
 		}
-		*/
 	}
 
 	public function findAllRunningTasksOrderedByDueDate($username = null)
