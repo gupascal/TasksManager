@@ -1,1 +1,9 @@
 {# src/TMS/TasksManagerBundle/Resources/views/Default/show.html.twig #}
+{% extends "TMSUsersBundle:Default:userPage.html.twig" %}
+
+{% block title %}{{ username }} - _____{% endblock %}
+
+{% block content %}
+	<h1>Hello {{ username }}!</h1>
+	<p>one task</p>
+{% endblock %}
