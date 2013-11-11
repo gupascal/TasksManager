@@ -13,6 +13,8 @@
 			{{task.getPriority()}}
 			{#{{task.getDateBegin()}} Don't work ??#}
 			{#{{task.getDateEnd()}}#}
+			<a href="{{ path('tms_tasks_manager_show', { 'username': 'KeRNeLith', 'taskid': task.getId() }) }}">Show in details</a>
+			{#<a href="{{ path('tms_tasks_manager_show', { 'username': 'gupascal', 'taskid': task.getId() }) }}">Show in details</a>#}
 		</div>
 	{% endfor %}
 	
@@ -24,6 +26,7 @@
 			{{task.getPriority()}}
 			{#{{task.getDateBegin()}} Don't work ??#}
 			{#{{task.getDateEnd()}}#}
+			<a href="{{ path('tms_tasks_manager_show', { 'username': 'KeRNeLith', 'taskid': task.getId() }) }}">Show in details</a>
 		</div>
 	{% endfor %}
 	

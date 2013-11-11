@@ -14,6 +14,9 @@
 			{#{{task.getDateBegin()}} Don't work ??#}
 			{#{{task.getDateEnd()}}#}
 			<a href="{{ path('tms_tasks_manager_show', { 'username': 'KeRNeLith', 'taskid': task.getId() }) }}">Show in details</a>
+			{#<a href="{{ path('tms_tasks_manager_show', { 'username': 'gupascal', 'taskid': task.getId() }) }}">Show in details</a>#}
 		</div>
 	{% endfor %}
+	<a href="{{ path('tms_users_dashboard', { 'username': 'KeRNeLith' }) }}">Return to dashboard</a>
+	{#<a href="{{ path('tms_users_dashboard', { 'username': 'KeRNeLith' }) }}">Return to dashboard</a>#}
 {% endblock %}
