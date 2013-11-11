@@ -45,7 +45,20 @@ class TaskRepository extends EntityRepository
 	{
 		$qb = $this->createQueryBuilder('t');
 		//$this->whereUserIs($qb, $username);
-		return $qb->andWhere('t.date_completed IS NOT NULL')
+		return $qb->andWhere('t.date_started IS NULL')
+					->orderBy('t.due_date', 'ASC')
+					//->setFirstResult($offset)
+					->setMaxResults($limit)
+					->getQuery()
+					->getResult();
+	}
+	
+	public function findTasksInProgress($limit)
+	{
+		$qb = $this->createQueryBuilder('t');
+		//$this->whereUserIs($qb, $username);
+		return $qb->andWhere('t.date_started IS NOT NULL')
+					->andWhere('t.date_completed IS NULL')
 					->orderBy('t.due_date', 'ASC')
 					//->setFirstResult($offset)
 					->setMaxResults($limit)
