@@ -1,2 +1,15 @@
 {# src/TMS/UsersBundle/Resources/views/Default/dashboard.html.twig #}
-Hello {{ username }}!
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ username }} - Tasks Manager{% endblock %}
+
+{% block header %}
+	<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
+	<p>{{ username }}</p>
+	{#<a href="{{ path('Default', { 'username': 'xxx' }) }}">Manage your profil</a>#}
+{% endblock %}
+	
+{% block content %}
+	<h1>Hello {{ username }}!</h1>
+	<p>task manager here</p>
+{% endblock %}
