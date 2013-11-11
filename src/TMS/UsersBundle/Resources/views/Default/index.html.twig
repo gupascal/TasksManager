@@ -1,28 +1,13 @@
 {# src/TMS/UsersBundle/Resources/views/Default/index.html.twig #}
-{% extends "::base.html.twig" %}
+{% extends "::layout.html.twig" %}
 
-{% block title %}Home Page{% endblock %}
-
-{% block body %}
-	<header>
-		{% block header %}
-			{#<form method="post" {{ form_enctype(form) }}>
-				{#{{ form_widget(form) }}
-				{#<input type="submit"/>
-			{#</form> #}
-		{% endblock %}
-	</header>
+{% block header %}
+	{#<form method="post" {{ form_enctype(form) }}>
+		{#{{ form_widget(form) }}
+		{#<input type="submit"/>
+	{#</form> #}
+{% endblock %}
 	
-	{% block content %}
-		<div id="main">
-			<h1>Hello !</h1>
-		</div>
-	{% endblock %}
-	
-	<footer>
-		{% block footer %}
-			<p>Copyright 2013</p>
-		{% endblock %}
-	</footer>
-	
+{% block content %}
+	<h1>Hello !</h1>
 {% endblock %}

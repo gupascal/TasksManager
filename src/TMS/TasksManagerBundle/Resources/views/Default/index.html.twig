@@ -1,23 +1,15 @@
 {# src/TMS/TasksManagerBundle/Resources/views/Default/index.html.twig #}
-{% extends "::base.html.twig" %}
+{% extends "TMSUsersBundle:Default:index.html.twig" %}
 
-{% block title %}Home Page{% endblock %}
+{% block title %}{{ username }} - Tasks List{% endblock %}
 
-{% block body %}
-	<header>
-		<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
-		<p>{{ username }}</p>
-		{#<a href="{{ path('Default', { 'username': 'xxx' }) }}">Manage your profil</a>#}
-	</header>
+{% block header %}
+	<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
+	<p>{{ username }}</p>
+	{#<a href="{{ path('Default', { 'username': 'xxx' }) }}">Manage your profil</a>#}
+{% endblock %}
 	
-	{% block content %}
-		<div id="main">
-			<h1>Hello {{ username }}!</h1>
-		</div>
-	{% endblock %}
-	
-	<footer>
-		<p>Copyright 2013</p>
-	</footer>
-	
+{% block content %}
+	<h1>Hello {{ username }}!</h1>
+	<p>task list here</p>
 {% endblock %}

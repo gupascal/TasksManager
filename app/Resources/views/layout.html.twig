@@ -1,0 +1,23 @@
+{# app/Resources/views/layout.html.twig #}
+{% extends "::base.html.twig" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block body %}
+	<header>
+		{% block header %}
+		{% endblock %}
+	</header>
+	
+	<div id="main">
+		{% block content %}
+		{% endblock %}
+	</div>
+	
+	<footer>
+		{% block footer %}
+			<p>Copyright 2013</p>
+		{% endblock %}
+	</footer>
+	
+{% endblock %}
