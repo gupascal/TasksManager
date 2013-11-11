@@ -22,6 +22,6 @@ class DefaultController extends Controller
 			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage', array('username' => $username)));
 		}
 		
-        return $this->render('TMSTasksManagerBundle:Default:show.html.twig', array('username' => $username, 'tasks' => $task));
+        return $this->render('TMSTasksManagerBundle:Default:show.html.twig', array('username' => $username, 'task' => $task));
     }
 }

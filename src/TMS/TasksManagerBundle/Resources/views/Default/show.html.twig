@@ -5,5 +5,10 @@
 
 {% block content %}
 	<h1>Hello {{ username }}!</h1>
-	<p>one task</p>
+	<p>Task :</p>
+	{{task.getName()}}
+	{{task.getDescription()}}
+	{{task.getPriority()}}
+	{#{{task.getDateBegin()}} Don't work ??#}
+	{#{{task.getDateEnd()}}#}
 {% endblock %}

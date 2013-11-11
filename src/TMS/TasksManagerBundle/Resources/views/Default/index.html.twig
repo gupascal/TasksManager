@@ -5,5 +5,15 @@
 	
 {% block content %}
 	<h1>Hello {{ username }}!</h1>
-	<p>task list here</p>
+	<p>Next your Task List :</p>
+	{% for task in tasks %}
+		<div id="task">
+			{{task.getName()}}
+			{{task.getDescription()}}
+			{{task.getPriority()}}
+			{#{{task.getDateBegin()}} Don't work ??#}
+			{#{{task.getDateEnd()}}#}
+			<a href="{{ path('tms_tasks_manager_show', { 'username': 'KeRNeLith', 'taskid': task.getId() }) }}">Show in details</a>
+		</div>
+	{% endfor %}
 {% endblock %}
