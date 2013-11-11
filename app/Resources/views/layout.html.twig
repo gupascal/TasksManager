@@ -16,7 +16,17 @@
 	
 	<footer>
 		{% block footer %}
-			<p>Copyright 2013</p>
+			<p>Copyright 2013</p>{# PHP function that will write the correct copyright #}
+			{# 	function copyright($year)
+			{#	{
+			{#		$current_year = date('Y');
+			{#		if($year != $current_year) 
+			{#		{
+			{#			echo $year . ' - ' . $current_year;
+			{#		}
+			{#		else
+			{#			echo $year;
+			{#	}#}
 		{% endblock %}
 	</footer>
 	
