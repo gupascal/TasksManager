@@ -48,7 +48,7 @@ class Task
 	
 	/**
      * @ORM\ManyToOne(targetEntity="TMS\UsersBundle\Entity\User", inversedBy="tasks")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
      */
 	 protected $user;
 	
@@ -84,75 +84,6 @@ class Task
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Task
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set date_begin
-     *
-     * @param \DateTime $dateBegin
-     * @return Task
-     */
-    public function setDateBegin($dateBegin)
-    {
-        $this->date_begin = $dateBegin;
-    
-        return $this;
-    }
-
-    /**
-     * Get date_begin
-     *
-     * @return \DateTime 
-     */
-    public function getDateBegin()
-    {
-        return $this->date_begin;
-    }
-
-    /**
-     * Set date_end
-     *
-     * @param \DateTime $dateEnd
-     * @return Task
-     */
-    public function setDateEnd($dateEnd)
-    {
-        $this->date_end = $dateEnd;
-    
-        return $this;
-    }
-
-    /**
-     * Get date_end
-     *
-     * @return \DateTime 
-     */
-    public function getDateEnd()
-    {
-        return $this->date_end;
     }
 
     /**
@@ -202,6 +133,29 @@ class Task
     }
 
     /**
+     * Set description
+     *
+     * @param string $description
+     * @return Task
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
      * Set date_started
      *
      * @param \DateTime $dateStarted
@@ -248,35 +202,12 @@ class Task
     }
 
     /**
-     * Set user_id
-     *
-     * @param \TMS\TasksManagerBundle\Entity\User $userId
-     * @return Task
-     */
-    public function setUserId(\TMS\TasksManagerBundle\Entity\User $userId = null)
-    {
-        $this->user_id = $userId;
-    
-        return $this;
-    }
-
-    /**
-     * Get user_id
-     *
-     * @return \TMS\TasksManagerBundle\Entity\User 
-     */
-    public function getUserId()
-    {
-        return $this->user_id;
-    }
-
-    /**
      * Set user
      *
-     * @param \TMS\TasksManagerBundle\Entity\User $user
+     * @param \TMS\UsersBundle\Entity\User $user
      * @return Task
      */
-    public function setUser(\TMS\TasksManagerBundle\Entity\User $user = null)
+    public function setUser(\TMS\UsersBundle\Entity\User $user)
     {
         $this->user = $user;
     
@@ -286,7 +217,7 @@ class Task
     /**
      * Get user
      *
-     * @return \TMS\TasksManagerBundle\Entity\User 
+     * @return \TMS\UsersBundle\Entity\User 
      */
     public function getUser()
     {
