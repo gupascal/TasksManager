@@ -36,7 +36,7 @@ class User
 	protected $passwordHash;
 	
 	/**
-     * @ORM\OneToMany(targetEntity="TMS\TasksManagerBundle\Entity\Task", mappedBy="user_id")
+     * @ORM\OneToMany(targetEntity="TMS\TasksManagerBundle\Entity\Task", mappedBy="user")
      */
 	 protected $tasks;
 	 
@@ -45,6 +45,7 @@ class User
     {
         $this->tasks = new ArrayCollection();
     }
+
 
 
 

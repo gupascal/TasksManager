@@ -3,6 +3,7 @@
 namespace TMS\TasksManagerBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * TaskRepository
@@ -12,39 +13,39 @@ use Doctrine\ORM\EntityRepository;
  */
 class TaskRepository extends EntityRepository
 {
-	private function whereUserIs(\Doctrine\ORM\QueryBuilder $qb, $username = null)
+	private function whereUserIs(\Doctrine\ORM\QueryBuilder $qb, $username)
 	{
 		if ($username !== null) {
-			$qb->innerJoin('TMS\UsersBundle\Entity\User', 'u', 'WITH', 't.user_id = u.id')
+			$qb->innerJoin('TMS\UsersBundle\Entity\User', 'u', Join::WITH, 't.user = u.id')
 				->andWhere('u.username = :username')
 				->setParameter('username', $username);
 		}
 	}
 
-	public function findAllRunningTasksOrderedByDueDate($username = null)
+	public function findAllRunningTasksOrderedByDueDate($username)
 	{
 		$qb = $this->createQueryBuilder('t');
-		//$this->whereUserIs($qb, $username);
+		$this->whereUserIs($qb, $username);
 		return $qb->andWhere('t.date_completed IS NOT NULL')
 					->orderBy('t.due_date', 'ASC')
 					->getQuery()
 					->getResult();
 	}
 	
-	public function find($taskid, $username = null)
+	public function findUserTask($username, $taskid)
 	{
 		$qb = $this->createQueryBuilder('t');
-		//$this->whereUserIs($qb, $username);
-		return $qb->where('t.id = :id')
+		$this->whereUserIs($qb, $username);
+		return $qb->andWhere('t.id = :id')
 						->setParameter('id', $taskid)
 						->getQuery()
 						->getOneOrNullResult();
 	}
 	
-	public function findNextTasks($limit)
+	public function findNextTasks($username, $limit)
 	{
 		$qb = $this->createQueryBuilder('t');
-		//$this->whereUserIs($qb, $username);
+		$this->whereUserIs($qb, $username);
 		return $qb->andWhere('t.date_started IS NULL')
 					->orderBy('t.due_date', 'ASC')
 					//->setFirstResult($offset)
@@ -53,10 +54,10 @@ class TaskRepository extends EntityRepository
 					->getResult();
 	}
 	
-	public function findTasksInProgress($limit)
+	public function findTasksInProgress($username, $limit)
 	{
 		$qb = $this->createQueryBuilder('t');
-		//$this->whereUserIs($qb, $username);
+		$this->whereUserIs($qb, $username);
 		return $qb->andWhere('t.date_started IS NOT NULL')
 					->andWhere('t.date_completed IS NULL')
 					->orderBy('t.due_date', 'ASC')

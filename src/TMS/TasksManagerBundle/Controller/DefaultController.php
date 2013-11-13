@@ -15,7 +15,7 @@ class DefaultController extends Controller
 	
 	public function showAction($username, $taskid)
     {
-		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->find($taskid, $username);
+		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findUserTask($username, $taskid);
 		
 		// Redirect if the task doesn't exist
 		if ($task === null) {

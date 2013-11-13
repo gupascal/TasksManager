@@ -13,8 +13,8 @@ class DefaultController extends Controller
 	
 	public function dashboardAction($username)
     {
-		$next_tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findNextTasks(5);
-		$tasks_in_progress = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findTasksInProgress(5);
+		$next_tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findNextTasks($username, 5);
+		$tasks_in_progress = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findTasksInProgress($username, 5);
 	
         return $this->render('TMSUsersBundle:Default:dashboard.html.twig', array('username' => $username,
 																				 'next_tasks' => $next_tasks,
