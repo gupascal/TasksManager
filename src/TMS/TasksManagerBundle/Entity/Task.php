@@ -2,6 +2,7 @@
 namespace TMS\TasksManagerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="TMS\TasksManagerBundle\Entity\TaskRepository")
@@ -18,6 +19,7 @@ class Task
 
     /**
      * @ORM\Column(type="string", length=100)
+	 * @Assert\NotBlank()
      */
     protected $name;
 	
@@ -28,6 +30,8 @@ class Task
 	
 	/**
 	 * @ORM\Column(type="datetime")
+	 * @Assert\NotBlank()
+	 * @Assert\Type("\DateTime")
 	 */
 	protected $due_date;
 	

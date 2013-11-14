@@ -3,12 +3,14 @@
 namespace TMS\UsersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use TMS\UsersBundle\Form\Type\UserSignUpType;
 
 class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('TMSUsersBundle:Default:index.html.twig');
+		$signup_form = $this->createForm(new UserSignUpType());
+        return $this->render('TMSUsersBundle:Default:index.html.twig', array('signup_form' => $signup_form));
     }
 	
 	public function dashboardAction($username)

@@ -26,7 +26,7 @@ class TaskRepository extends EntityRepository
 	{
 		$qb = $this->createQueryBuilder('t');
 		$this->whereUserIs($qb, $username);
-		return $qb->andWhere('t.date_completed IS NOT NULL')
+		return $qb//->andWhere('t.date_completed IS NOT NULL')
 					->orderBy('t.due_date', 'ASC')
 					->getQuery()
 					->getResult();
