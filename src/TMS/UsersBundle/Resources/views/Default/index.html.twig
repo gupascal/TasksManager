@@ -2,6 +2,11 @@
 {% extends "::layout.html.twig" %}
 
 {% block header %}
+	
+{% endblock %}
+	
+{% block content %}
+	<h1>Hello !</h1>
 	{{ form_start(signup_form) }}
 		{{ form_errors(signup_form) }}
 		
@@ -10,10 +15,7 @@
 		{{ form_row(signup_form.passwordHash) }}
 		{{ form_row(signup_form.save) }}
 	{{ form_end(signup_form) }}
-{% endblock %}
 	
-{% block content %}
-	<h1>Hello !</h1>
 	<a href="{{ path('tms_users_dashboard', { 'username': 'KeRNeLith' }) }}">Link to your Dashboard</a>
 	{#<a href="{{ path('tms_users_dashboard', { 'username': 'gupascal' }) }}">Link to your Dashboard</a>#}
 {% endblock %}
