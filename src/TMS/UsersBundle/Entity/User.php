@@ -1,7 +1,9 @@
 <?php // src/TMS/UsersBundle/Entity/User.php
 namespace TMS\UsersBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="TMS\UsersBundle\Entity\UserRepository")

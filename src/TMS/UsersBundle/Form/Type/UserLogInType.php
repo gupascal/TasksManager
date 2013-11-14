@@ -1,21 +1,20 @@
-<?php // src/TMS/UsersBundle/Form/Type/UserSignUpType.php
+<?php // src/TMS/UsersBundle/Form/Type/UserLogInType.php
 namespace TMS\UsersBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class UserSignUpType extends AbstractType
+class UserLogInType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('email', 'email')
-				->add('username', 'text')
+        $builder->add('username', 'text')
 				->add('passwordHash', 'password')
 				->add('save', 'submit');
     }
 
     public function getName()
     {
-        return 'user_signup';
+        return 'user_login';
     }
 }
