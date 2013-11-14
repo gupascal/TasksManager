@@ -3,6 +3,7 @@
 namespace TMS\UsersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use TMS\UsersBundle\Form\Type\UserLogInType;
 use TMS\UsersBundle\Form\Type\UserSignUpType;
 
 class DefaultController extends Controller
@@ -10,7 +11,10 @@ class DefaultController extends Controller
     public function indexAction()
     {
 		$signup_form = $this->createForm(new UserSignUpType());
-        return $this->render('TMSUsersBundle:Default:index.html.twig', array('signup_form' => $signup_form));
+		$login_form = $this->createForm(new UserLogInType());
+		
+        return $this->render('TMSUsersBundle:Default:index.html.twig', array('signup_form' => $signup_form,
+																			 'login_form' => $login_form));
     }
 	
 	public function dashboardAction($username)
