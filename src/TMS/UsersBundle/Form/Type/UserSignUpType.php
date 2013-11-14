@@ -9,7 +9,7 @@ class UserSignUpType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('email', 'email')
-				->add('name', 'text')
+				->add('username', 'text')
 				->add('passwordHash', 'password')
 				->add('save', 'submit');
     }

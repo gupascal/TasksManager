@@ -8,7 +8,7 @@ class UserLogInType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text')
+        $builder->add('username', 'text')
 				->add('passwordHash', 'password')
 				->add('save', 'submit');
     }
