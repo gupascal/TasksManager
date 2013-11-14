@@ -20,9 +20,12 @@ class DefaultController extends Controller
 		$signup_form->handleRequest($request);
 		
 		if ($signup_form->isValid()) {
-			$signup = $signup_form->getData();
-			$em->persist($signup->getUser());
-			$em->flush();
+			$user = $signup_form->getData();
+			if ($em->getRepository('TMSUsersBundle:User')->isNotRegistratedUser($user))
+			{
+				$em->persist($user);
+				$em->flush();
+			}
 		}
 		
         return $this->render('TMSUsersBundle:Default:index.html.twig', array('signup_form' => $signup_form->createView(),
