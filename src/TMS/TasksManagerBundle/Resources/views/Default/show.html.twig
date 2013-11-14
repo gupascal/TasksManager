@@ -9,6 +9,6 @@
 	{{task.getName()}}
 	{{task.getDescription()}}
 	{{task.getPriority()}}
-	{#{{task.getDateBegin()}} Don't work ??#}
-	{#{{task.getDateEnd()}}#}
+	{{task.getDateStarted()}}
+	{{task.getDateCompleted()}}
 {% endblock %}

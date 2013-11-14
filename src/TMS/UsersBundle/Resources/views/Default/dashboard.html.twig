@@ -11,10 +11,9 @@
 			{{task.getName()}}
 			{{task.getDescription()}}
 			{{task.getPriority()}}
-			{#{{task.getDateBegin()}} Don't work ??#}
-			{#{{task.getDateEnd()}}#}
-			<a href="{{ path('tms_tasks_manager_show', { 'username': 'KeRNeLith', 'taskid': task.getId() }) }}">Show in details</a>
-			{#<a href="{{ path('tms_tasks_manager_show', { 'username': 'gupascal', 'taskid': task.getId() }) }}">Show in details</a>#}
+			{{task.getDateStarted()}}
+			{{task.getDateCompleted()}}
+			<a href="{{ path('tms_tasks_manager_show', { 'username': username, 'taskid': task.getId() }) }}">Show in details</a>
 		</div>
 	{% endfor %}
 	
@@ -24,12 +23,11 @@
 			{{task.getName()}}
 			{{task.getDescription()}}
 			{{task.getPriority()}}
-			{#{{task.getDateBegin()}} Don't work ??#}
-			{#{{task.getDateEnd()}}#}
-			<a href="{{ path('tms_tasks_manager_show', { 'username': 'KeRNeLith', 'taskid': task.getId() }) }}">Show in details</a>
+			{{task.getDateStarted()}}
+			{{task.getDateCompleted()}}
+			<a href="{{ path('tms_tasks_manager_show', { 'username': username, 'taskid': task.getId() }) }}">Show in details</a>
 		</div>
 	{% endfor %}
 	
-	<a href="{{ path('tms_tasks_manager_homepage', { 'username': 'KeRNeLith' }) }}">Link to your Task list</a>
-	{#<a href="{{ path('tms_tasks_manager_homepage', { 'username': 'gupascal' }) }}">Link to your Task list</a>#}
+	<a href="{{ path('tms_tasks_manager_homepage', { 'username': username }) }}">Link to your Task list</a>
 {% endblock %}
