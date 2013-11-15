@@ -4,6 +4,8 @@ namespace TMS\UsersBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
  * @ORM\Entity(repositoryClass="TMS\UsersBundle\Entity\UserRepository")
@@ -13,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 									@ORM\UniqueConstraint(name="username_idx", columns={"username"})
  * 								})
  */
-class User
+class User implements UserInterface, \Serializable
 {
 	/**
      * @ORM\Column(type="integer")
@@ -35,7 +37,12 @@ class User
 	/**
      * @ORM\Column(type="string", length=255)
      */
-	protected $passwordHash;
+	protected $password;
+	
+	/**
+     * @ORM\Column(type="string", length=32)
+     */
+    private $salt;
 	
 	/**
      * @ORM\OneToMany(targetEntity="TMS\TasksManagerBundle\Entity\Task", mappedBy="user")
@@ -46,9 +53,8 @@ class User
 	public function __construct()
     {
         $this->tasks = new ArrayCollection();
+		$this->salt = md5(uniqid(null, true));
     }
-
-
 
 
     /**
@@ -100,34 +106,60 @@ class User
     /**
      * Get username
      *
+	 * @inheritDoc
      * @return string 
      */
     public function getUsername()
     {
         return $this->username;
     }
-
+	
     /**
-     * Set passwordHash
+     * Set password
      *
-     * @param string $passwordHash
+     * @param string $password
      * @return User
      */
-    public function setPasswordHash($passwordHash)
+    public function setPassword($password)
     {
-        $this->passwordHash = $passwordHash;
+        $this->password = $password;
     
         return $this;
     }
 
     /**
-     * Get passwordHash
+     * Get password
      *
+	 * @inheritDoc
      * @return string 
      */
-    public function getPasswordHash()
+    public function getPassword()
     {
-        return $this->passwordHash;
+        return $this->password;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+	 * @inheritDoc
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
     }
 
     /**
@@ -162,4 +194,44 @@ class User
     {
         return $this->tasks;
     }
+	
+	/**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
+
+   /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+        ) = unserialize($serialized);
+    }
+	
+	public function isEqualTo(UserInterface $user)
+	{
+		return $this->username === $user->getUsername();
+	}
 }

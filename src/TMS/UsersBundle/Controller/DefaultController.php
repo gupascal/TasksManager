@@ -23,10 +23,22 @@ class DefaultController extends Controller
 			$user = $signup_form->getData();
 			if ($em->getRepository('TMSUsersBundle:User')->isNotRegistratedUser($user))
 			{
+				$factory = $this->get('security.encoder_factory');
+				$encoder = $factory->getEncoder($user);
+				$password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+				$user->setPassword($password);
+				
 				$em->persist($user);
 				$em->flush();
 			}
 		}
+		
+		// login
+		// $factory = $this->get('security.encoder_factory');
+		// $encoder = $factory->getEncoder($user);
+		// $password = $encoder->encodePassword('ryanpass', $user->getSalt());
+		// $user->setPassword($password);
+		// $encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt());
 		
         return $this->render('TMSUsersBundle:Default:index.html.twig', array('signup_form' => $signup_form->createView(),
 																			 'login_form' => $login_form->createView()));
