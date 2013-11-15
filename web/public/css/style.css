@@ -2,3 +2,20 @@ html, body {
 	margin: 0;
 	background: #eeeeee
 }
+
+strong {
+	font-weight: bold;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.links {
+	color: #081b7e;
+}
+
+p {
+	margin: 5px 0;
+}
