@@ -53,3 +53,7 @@ section {
 .progressTask {
 	width: 22%;
 }
+
+#main .links {
+	padding-left: 10px;
+}
