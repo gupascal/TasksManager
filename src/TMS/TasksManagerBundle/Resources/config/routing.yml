@@ -1,9 +1,9 @@
 tms_tasks_manager_homepage:
-    pattern:  /{username}/tasks
+    pattern:  /tasks
     defaults: { _controller: TMSTasksManagerBundle:Default:index }
 
 tms_tasks_manager_show:
-    pattern:  /{username}/tasks/{taskid}
+    pattern:  /tasks/{taskid}
     defaults: { _controller: TMSTasksManagerBundle:Default:show }
     requirements:
         id:  \d+

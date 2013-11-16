@@ -8,6 +8,6 @@
 
 {% block header %}
 	<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
-	<p>{{ username }}</p>
-	{#<a href="{{ path('Default', { 'username': 'xxx' }) }}">Manage your profil</a>#}
+	<p>{{ app.user.username }}</p>
+	{#<a href="{{ path('Default') }}">Manage your profil</a>#}
 {% endblock %}

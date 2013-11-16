@@ -58,13 +58,14 @@ class DefaultController extends Controller
         ));
 	}
 	
-	public function dashboardAction($username)
+	public function dashboardAction()
     {
-		$next_tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findNextTasks($username, 5);
-		$tasks_in_progress = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findTasksInProgress($username, 5);
+		$user = $this->getUser();
 	
-        return $this->render('TMSUsersBundle:Default:dashboard.html.twig', array('username' => $username,
-																				 'next_tasks' => $next_tasks,
+		$next_tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findNextTasks($user->getUsername(), 5);
+		$tasks_in_progress = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findTasksInProgress($user->getUsername(), 5);
+	
+        return $this->render('TMSUsersBundle:Default:dashboard.html.twig', array('next_tasks' => $next_tasks,
 																				 'tasks_in_progress' => $tasks_in_progress));
     }
 }

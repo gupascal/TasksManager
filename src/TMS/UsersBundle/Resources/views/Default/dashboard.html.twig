@@ -1,10 +1,10 @@
 {# src/TMS/UsersBundle/Resources/views/Default/dashboard.html.twig #}
 {% extends "TMSUsersBundle:Default:userPage.html.twig" %}
 
-{% block title %}{{ username }} - Tasks Manager{% endblock %}
+{% block title %}{{ app.user.username }} - Tasks Manager{% endblock %}
 
 {% block content %}
-	<h1>Hello {{ username }}!</h1>
+	<h1>Hello {{ app.user.username }}!</h1>
 	<p>Next 5 Tasks :</p>
 	{% for task in next_tasks %}
 		<div id="task">
@@ -13,7 +13,7 @@
 			{{task.getPriority()}}
 			{{task.getDateStarted()}}
 			{{task.getDateCompleted()}}
-			<a href="{{ path('tms_tasks_manager_show', { 'username': username, 'taskid': task.getId() }) }}">Show in details</a>
+			<a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">Show in details</a>
 		</div>
 	{% endfor %}
 	
@@ -25,9 +25,9 @@
 			{{task.getPriority()}}
 			{{task.getDateStarted()}}
 			{{task.getDateCompleted()}}
-			<a href="{{ path('tms_tasks_manager_show', { 'username': username, 'taskid': task.getId() }) }}">Show in details</a>
+			<a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">Show in details</a>
 		</div>
 	{% endfor %}
 	
-	<a href="{{ path('tms_tasks_manager_homepage', { 'username': username }) }}">Link to your Task list</a>
+	<a href="{{ path('tms_tasks_manager_homepage') }}">Link to your Task list</a>
 {% endblock %}
