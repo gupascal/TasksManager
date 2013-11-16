@@ -4,6 +4,7 @@ namespace TMS\UsersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContext;
 use TMS\UsersBundle\Entity\User;
 use TMS\UsersBundle\Form\Type\UserLogInType;
 use TMS\UsersBundle\Form\Type\UserSignUpType;
@@ -15,7 +16,6 @@ class DefaultController extends Controller
 		$em = $this->getDoctrine()->getManager();
 	
 		$signup_form = $this->createForm(new UserSignUpType(), new User());
-		$login_form = $this->createForm(new UserLogInType(), new User());
 		
 		$signup_form->handleRequest($request);
 		
@@ -33,16 +33,30 @@ class DefaultController extends Controller
 			}
 		}
 		
-		// login
-		// $factory = $this->get('security.encoder_factory');
-		// $encoder = $factory->getEncoder($user);
-		// $password = $encoder->encodePassword('ryanpass', $user->getSalt());
-		// $user->setPassword($password);
-		// $encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt());
-		
-        return $this->render('TMSUsersBundle:Default:index.html.twig', array('signup_form' => $signup_form->createView(),
-																			 'login_form' => $login_form->createView()));
+        return $this->render('TMSUsersBundle:Default:index.html.twig', array('signup_form' => $signup_form->createView()));
     }
+	
+	public function loginAction()
+	{
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        // get the login error if there is one
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        }
+		
+		$login_form = $this->createForm(new UserLogInType(), new User(), array('action' => $this->generateUrl('login_check')));
+		
+        return $this->render('TMSUsersBundle:Default:login.html.twig', array(
+			'login_form'    => $login_form->createView(),
+            // last username entered by the user
+            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+            'error'         => $error,
+        ));
+	}
 	
 	public function dashboardAction($username)
     {

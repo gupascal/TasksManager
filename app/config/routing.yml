@@ -1,3 +1,13 @@
+login:
+    pattern:   /login
+    defaults: { _controller: TMSUsersBundle:Default:login }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    pattern:   /logout
+
 tms_users:
     resource: "@TMSUsersBundle/Resources/config/routing.yml"
     prefix:   /
@@ -5,10 +15,3 @@ tms_users:
 tms_tasks_manager:
     resource: "@TMSTasksManagerBundle/Resources/config/routing.yml"
     prefix:   /
-
-login:
-    pattern:   /
-    defaults: { _controller: TMSUsersBundle:Default:index }
-
-logout:
-    pattern:   /logout
