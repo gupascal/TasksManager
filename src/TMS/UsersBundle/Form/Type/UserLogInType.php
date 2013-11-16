@@ -10,7 +10,7 @@ class UserLogInType extends AbstractType
     {
         $builder->add('username', 'text')
 				->add('password', 'password')
-				->add('save', 'submit');
+				->add('submit', 'submit');
     }
 
     public function getName()

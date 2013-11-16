@@ -9,7 +9,7 @@
 		{{ form_row(signup_form.username) }}
 		{{ form_row(signup_form.email) }}
 		{{ form_row(signup_form.password) }}
-		{{ form_row(signup_form.save) }}
+		{{ form_row(signup_form.submit, {'label': 'Sign Up'}) }}
 	{{ form_end(signup_form) }}
 	
 	<a href="{{ path('tms_users_dashboard') }}">Link to your Dashboard</a>
