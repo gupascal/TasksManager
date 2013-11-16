@@ -1,33 +1,59 @@
 {# src/TMS/UsersBundle/Resources/views/Default/dashboard.html.twig #}
-{% extends "TMSUsersBundle:Default:userPage.html.twig" %}
+{% extends "::layout.html.twig" %}
 
-{% block title %}{{ app.user.username }} - Tasks Manager{% endblock %}
+{% block title %}{{ app.user.username }} - Dashboard{% endblock %}
+
+{% block Stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/tmsusers/css/styleDashboard.css')  }}" rel="stylesheet" type="text/css"> 
+{% endblock %}
+
+{% block header %}
+	<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
+	<p>{{ app.user.username }}</p>
+	{#<a href="{{ path('Default', { 'username': 'xxx' }) }}">Manage your profil</a>#}
+{% endblock %}
 
 {% block content %}
-	<h1>Hello {{ app.user.username }}!</h1>
-	<p>Next 5 Tasks :</p>
-	{% for task in next_tasks %}
-		<div id="task">
-			{{task.getName()}}
-			{{task.getDescription()}}
-			{{task.getPriority()}}
-			{{task.getDateStarted()}}
-			{{task.getDateCompleted()}}
-			<a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">Show in details</a>
-		</div>
-	{% endfor %}
-	
-	<p>5 Tasks in progress :</p>
-	{% for task in tasks_in_progress %}
-		<div id="task">
-			{{task.getName()}}
-			{{task.getDescription()}}
-			{{task.getPriority()}}
-			{{task.getDateStarted()}}
-			{{task.getDateCompleted()}}
-			<a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">Show in details</a>
-		</div>
-	{% endfor %}
-	
-	<a href="{{ path('tms_tasks_manager_homepage') }}">Link to your Task list</a>
+	<a class="links" href="{{ path('tms_tasks_manager_homepage', { 'username': app.user.username }) }}">Link to your Task list</a>
+	<section>
+		<p>Next 5 Tasks :</p>
+		{% for task in next_tasks %}
+			<div class="task">
+				<div class="nameTask">
+					<p><a href="{{ path('tms_tasks_manager_show', { 'username': app.user.username, 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
+					<p>Priority: {{task.getPriority()}}</p>
+				</div>
+				<div class="descriptionTask">
+					{{task.getDescription()}}
+				</div>
+				<div class="progressTask">
+					<p>
+						{{task.getDateStarted()}}
+						{{task.getDateCompleted()}}
+					</p>
+				</div>
+			</div>
+		{% endfor %}
+	</section>
+	<section>
+		<p>5 Tasks in progress :</p>
+		{% for task in tasks_in_progress %}
+			<div class="task">
+					<div class="nameTask">
+						<p><a href="{{ path('tms_tasks_manager_show', { 'username': app.user.username, 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
+						<p>Priority: {{task.getPriority()}}</p>
+					</div>
+					<div class="descriptionTask">
+						{{task.getDescription()}}
+					</div>
+					<div class="progressTask">
+						<p>
+							{{task.getDateStarted()}}
+							{{task.getDateCompleted()}}
+						</p>
+					</div>
+				</div>
+		{% endfor %}
+	</section>
 {% endblock %}

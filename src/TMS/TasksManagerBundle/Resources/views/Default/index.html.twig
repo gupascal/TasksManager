@@ -1,20 +1,41 @@
 {# src/TMS/TasksManagerBundle/Resources/views/Default/index.html.twig #}
-{% extends "TMSUsersBundle:Default:userPage.html.twig" %}
+{% extends "::layout.html.twig" %}
 
 {% block title %}{{ app.user.username }} - Tasks List{% endblock %}
+{% block Stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/tmstasksmanager/css/styleListe.css')  }}" rel="stylesheet" type="text/css"> 
+{% endblock %}
+	
+{% block header %}
+	<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
+	<p>{{ app.user.username }}</p>
+	{#<a href="{{ path('Default', { 'username': 'xxx' }) }}">Manage your profil</a>#}
+{% endblock %}
 	
 {% block content %}
-	<h1>Hello {{ app.user.username }}!</h1>
-	<p>Next your Task List :</p>
-	{% for task in tasks %}
-		<div id="task">
-			{{task.getName()}}
-			{{task.getDescription()}}
-			{{task.getPriority()}}
-			{{task.getDateStarted()}}
-			{{task.getDateCompleted()}}
-			<a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">Show in details</a>
-		</div>
-	{% endfor %}
-	<a href="{{ path('tms_users_dashboard') }}">Return to dashboard</a>
+	<div id="filters">
+		Filtres de tri
+	</div>
+	<section>
+		<p>Next your Task List :</p>
+		{% for task in tasks %}
+			<div class="task">
+				<div class="nameTask">
+					<p><a href="{{ path('tms_tasks_manager_show', { 'username': app.user.username, 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
+					<p>Priority: {{task.getPriority()}}</p>
+				</div>
+				<div class="descriptionTask">
+					{{task.getDescription()}}
+				</div>
+				<div class="progressTask">
+					<p>
+						{{task.getDateStarted()}}
+						{{task.getDateCompleted()}}
+					</p>
+				</div>
+			</div>
+		{% endfor %}
+	</section>
+	<a class="links" href="{{ path('tms_users_dashboard', { 'username': app.user.username }) }}">Return to dashboard</a>
 {% endblock %}
