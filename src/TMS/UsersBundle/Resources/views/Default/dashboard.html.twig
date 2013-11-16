@@ -11,7 +11,7 @@
 {% block header %}
 	<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
 	<p>{{ app.user.username }}</p>
-	{#<a href="{{ path('Default', { 'username': 'xxx' }) }}">Manage your profil</a>#}
+	{#<a href="{{ path('Default') }}">Manage your profil</a>#}
 	<a href="{{ path('logout') }}">Logout</a>
 {% endblock %}
 
@@ -22,7 +22,7 @@
 		{% for task in next_tasks %}
 			<div class="task">
 				<div class="nameTask">
-					<p><a href="{{ path('tms_tasks_manager_show', { 'username': app.user.username, 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
+					<p><a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
 					<p>Priority: {{task.getPriority()}}</p>
 				</div>
 				<div class="descriptionTask">
@@ -42,7 +42,7 @@
 		{% for task in tasks_in_progress %}
 			<div class="task">
 					<div class="nameTask">
-						<p><a href="{{ path('tms_tasks_manager_show', { 'username': app.user.username, 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
+						<p><a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
 						<p>Priority: {{task.getPriority()}}</p>
 					</div>
 					<div class="descriptionTask">

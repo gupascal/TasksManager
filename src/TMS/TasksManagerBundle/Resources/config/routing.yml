@@ -6,4 +6,8 @@ tms_tasks_manager_show:
     pattern:  /tasks/{taskid}
     defaults: { _controller: TMSTasksManagerBundle:Default:show }
     requirements:
-        id:  \d+
+        taskid:  \d+
+
+tms_tasks_manager_create:
+    pattern:  /tasks/create
+    defaults: { _controller: TMSTasksManagerBundle:Default:create }

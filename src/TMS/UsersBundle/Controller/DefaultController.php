@@ -3,7 +3,6 @@
 namespace TMS\UsersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use TMS\UsersBundle\Entity\User;
 use TMS\UsersBundle\Form\Type\UserLogInType;
@@ -11,13 +10,13 @@ use TMS\UsersBundle\Form\Type\UserSignUpType;
 
 class DefaultController extends Controller
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
 		$em = $this->getDoctrine()->getManager();
 	
 		$signup_form = $this->createForm(new UserSignUpType(), new User());
 		
-		$signup_form->handleRequest($request);
+		$signup_form->handleRequest($this->getRequest());
 		
 		if ($signup_form->isValid()) {
 			$user = $signup_form->getData();
