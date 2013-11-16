@@ -1,12 +1,11 @@
 {# src/TMS/TasksManagerBundle/Resources/views/Default/index.html.twig #}
 {% extends "::layout.html.twig" %}
 
+{% block title %}{{ app.user.username }} - Tasks List{% endblock %}
 {% block Stylesheets %}
 	{{ parent() }}
 	<link href="{{ asset('bundles/tmstasksmanager/css/styleListe.css')  }}" rel="stylesheet" type="text/css"> 
 {% endblock %}
-
-{% block title %}{{ username }} - Tasks List{% endblock %}
 	
 {% block header %}
 	<img src="{{ asset('images/profil.png') }}" alt="profil photo" />

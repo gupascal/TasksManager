@@ -3,5 +3,5 @@ tms_users_homepage:
     defaults: { _controller: TMSUsersBundle:Default:index }
 
 tms_users_dashboard:
-    pattern:  /{username}
+    pattern:  /dashboard
     defaults: { _controller: TMSUsersBundle:Default:dashboard }

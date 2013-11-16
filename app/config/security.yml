@@ -11,7 +11,7 @@ security:
 
     providers:
         user_db:
-            entity: { class: TMSUsersBundle:User, property: username }
+            entity: { class: TMS\UsersBundle\Entity\User, property: username }
         #in_memory:
         #    memory:
         #        users:
@@ -23,23 +23,31 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        login:
-            pattern:  ^/
-            security: false
-
         secured_area:
-            pattern:  .*
+            pattern:  ^/
+            anonymous: true
             provider: user_db
             form_login:
                 check_path: /login_check
-                login_path: /
+                login_path: /login
+                always_use_default_target_path: true
+                default_target_path:            /
+                username_parameter: user_login[username]
+                password_parameter: user_login[password]
             logout:
-                path:   ^/logout
-                target: ^/
+                path:   /logout
+                target: /
+                # The following line is a temporary fix to a php bug with version under 5.4.11 : https://github.com/symfony/symfony/issues/5868
+                # Probably usefull only for php sessions.
+                invalidate_session: false
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
     access_control:
-        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/dashboard, roles: ROLE_USER }
+        - { path: ^/tasks, roles: ROLE_USER }
+        
+        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }

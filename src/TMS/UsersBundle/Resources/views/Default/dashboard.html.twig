@@ -1,7 +1,7 @@
 {# src/TMS/UsersBundle/Resources/views/Default/dashboard.html.twig #}
 {% extends "::layout.html.twig" %}
 
-{% block title %}{{ username }} - Dashboard{% endblock %}
+{% block title %}{{ app.user.username }} - Dashboard{% endblock %}
 
 {% block Stylesheets %}
 	{{ parent() }}

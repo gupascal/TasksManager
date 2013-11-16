@@ -6,22 +6,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($username)
+    public function indexAction()
     {
-		$tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findAllRunningTasksOrderedByDueDate($username);
+		$user = $this->getUser();
+	
+		$tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findAllRunningTasksOrderedByDueDate($user->getUsername());
 		
-        return $this->render('TMSTasksManagerBundle:Default:index.html.twig', array('username' => $username, 'tasks' => $tasks));
+        return $this->render('TMSTasksManagerBundle:Default:index.html.twig', array('tasks' => $tasks));
     }
 	
-	public function showAction($username, $taskid)
+	public function showAction($taskid)
     {
-		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findUserTask($username, $taskid);
+		$user = $this->getUser();
+	
+		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $taskid);
 		
 		// Redirect if the task doesn't exist
 		if ($task === null) {
-			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage', array('username' => $username)));
+			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
 		}
 		
-        return $this->render('TMSTasksManagerBundle:Default:show.html.twig', array('username' => $username, 'task' => $task));
+        return $this->render('TMSTasksManagerBundle:Default:show.html.twig', array('task' => $task));
     }
 }
