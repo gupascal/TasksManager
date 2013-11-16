@@ -1,8 +1,15 @@
 {# src/TMS/UsersBundle/Resources/views/Default/index.html.twig #}
 {% extends "::layout.html.twig" %}
-	
+
+{% block title %}Task Manager{% endblock %}
+
 {% block content %}
-	<h1>Hello !</h1>
+	{% if is_granted('ROLE_USER') %}
+		<a href="{{ path('tms_users_dashboard') }}">Go to your Dashboard</a>
+	{% else %}
+		<a href="{{ path('login') }}">Already register ? Log in</a>
+	{% endif %}
+	
 	{{ form_start(signup_form) }}
 		{{ form_errors(signup_form) }}
 		
@@ -12,5 +19,5 @@
 		{{ form_row(signup_form.submit, {'label': 'Sign Up'}) }}
 	{{ form_end(signup_form) }}
 	
-	<a href="{{ path('tms_users_dashboard') }}">Link to your Dashboard</a>
+	{#<a href="{{ path('tms_users_dashboard') }}">Link to your Dashboard</a>#}
 {% endblock %}

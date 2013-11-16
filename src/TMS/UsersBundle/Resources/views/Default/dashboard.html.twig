@@ -5,17 +5,18 @@
 
 {% block Stylesheets %}
 	{{ parent() }}
-	<link href="{{ asset('bundles/tmsusers/css/styleDashboard.css')  }}" rel="stylesheet" type="text/css"> 
+	<link href="{{ asset('bundles/tmsusers/css/styleDashboard.css')  }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block header %}
 	<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
 	<p>{{ app.user.username }}</p>
 	{#<a href="{{ path('Default', { 'username': 'xxx' }) }}">Manage your profil</a>#}
+	<a href="{{ path('logout') }}">Logout</a>
 {% endblock %}
 
 {% block content %}
-	<a class="links" href="{{ path('tms_tasks_manager_homepage', { 'username': app.user.username }) }}">Link to your Task list</a>
+	<a class="links" href="{{ path('tms_tasks_manager_homepage', { 'username': app.user.username }) }}">Go to your Task list</a>
 	<section>
 		<p>Next 5 Tasks :</p>
 		{% for task in next_tasks %}

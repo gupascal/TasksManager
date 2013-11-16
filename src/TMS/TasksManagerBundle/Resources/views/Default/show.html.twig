@@ -1,14 +1,23 @@
 {# src/TMS/TasksManagerBundle/Resources/views/Default/show.html.twig #}
 {% extends "::layout.html.twig" %}
 
-{% block title %}{{ app.user.username }} - _____{% endblock %}
+{% block title %}{{ app.user.username }} - Task: {{ task.getName() }}{% endblock %}
+
+{% block header %}
+	<a href="{{ path('logout') }}">Logout</a>
+{% endblock %}
 
 {% block content %}
-	<h1>Hello {{ app.user.username }}!</h1>
 	<p>Task :</p>
 	{{task.getName()}}
 	{{task.getDescription()}}
 	{{task.getPriority()}}
 	{{task.getDateStarted()}}
 	{{task.getDateCompleted()}}
+	
+	<p>
+		<a class="links" href="{{ path('tms_tasks_manager_homepage', { 'username': app.user.username }) }}">Return to your Task list</a>
+		or 
+		<a class="links" href="{{ path('tms_users_dashboard', { 'username': app.user.username }) }}">Return to your Dashboard</a>
+	<p>
 {% endblock %}

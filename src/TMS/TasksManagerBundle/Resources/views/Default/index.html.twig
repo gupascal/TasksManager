@@ -2,6 +2,7 @@
 {% extends "::layout.html.twig" %}
 
 {% block title %}{{ app.user.username }} - Tasks List{% endblock %}
+
 {% block Stylesheets %}
 	{{ parent() }}
 	<link href="{{ asset('bundles/tmstasksmanager/css/styleListe.css')  }}" rel="stylesheet" type="text/css"> 
@@ -11,6 +12,7 @@
 	<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
 	<p>{{ app.user.username }}</p>
 	{#<a href="{{ path('Default', { 'username': 'xxx' }) }}">Manage your profil</a>#}
+	<a href="{{ path('logout') }}">Logout</a>
 {% endblock %}
 	
 {% block content %}
@@ -37,5 +39,5 @@
 			</div>
 		{% endfor %}
 	</section>
-	<a class="links" href="{{ path('tms_users_dashboard', { 'username': app.user.username }) }}">Return to dashboard</a>
+	<a class="links" href="{{ path('tms_users_dashboard', { 'username': app.user.username }) }}">Return to Dashboard</a>
 {% endblock %}

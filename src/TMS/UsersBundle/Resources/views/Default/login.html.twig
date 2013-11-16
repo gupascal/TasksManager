@@ -1,9 +1,9 @@
 {# src/TMS/UsersBundle/Resources/views/Default/login.html.twig #}
 {% extends "::layout.html.twig" %}
 	
-{% block content %}
-	<h1>Hello !</h1>
+{% block title %}Task Manager - Login{% endblock %}
 	
+{% block content %}
 {% if error %}
     <div>{{ error.message }}</div>
 {% endif %}
