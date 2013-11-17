@@ -44,6 +44,8 @@ class DefaultController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($task);
 			$em->flush();
+			
+			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
 		}
 		
 		return $this->render('TMSTasksManagerBundle:Default:create.html.twig', array('creation_form' => $creation_form->createView()));
