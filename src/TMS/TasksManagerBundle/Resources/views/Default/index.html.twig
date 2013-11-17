@@ -13,6 +13,7 @@
 	<p>{{ app.user.username }}</p>
 	{#<a href="{{ path('Default') }}">Manage your profil</a>#}
 	<a href="{{ path('logout') }}">Logout</a>
+	<a class="links" href="{{ path('tms_tasks_manager_create') }}">Create a new Task</a>
 {% endblock %}
 	
 {% block content %}

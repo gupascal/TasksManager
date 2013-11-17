@@ -1,8 +1,18 @@
 {# src/TMS/TasksManagerBundle/Resources/views/Default/create.html.twig #}
 {% extends "::layout.html.twig" %}
 
-{% block title %}{{ app.user.username }} - Create task{% endblock %}
+{% block title %}{{ app.user.username }} - Create New Task{% endblock %}
 	
-{% block content %}
-	{{ form(creation_form) }}
+{% block content %}			
+	{{ form_start(creation_form) }}
+		{{ form_errors(creation_form) }}
+		
+		{{ form_row(creation_form.name) }}
+		{{ form_row(creation_form.priority) }}
+		{{ form_row(creation_form.due_date) }}
+		{{ form_row(creation_form.description) }}
+		{{ form_row(creation_form.submit) }}
+	{{ form_end(creation_form) }}
+	
+	<a class="links" href="{{ path('tms_users_dashboard', { 'username': app.user.username }) }}">Return to Dashboard</a>
 {% endblock %}
