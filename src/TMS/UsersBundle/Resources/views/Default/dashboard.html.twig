@@ -34,6 +34,9 @@
 						{{task.getDateStarted()}}
 						{{task.getDateCompleted()}}
 					</p>
+					<p>
+						<a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a>
+					</p>
 				</div>
 			</div>
 		{% endfor %}
@@ -53,6 +56,9 @@
 						<p>
 							{{task.getDateStarted()}}
 							{{task.getDateCompleted()}}
+						</p>
+						<p>
+							<a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a>
 						</p>
 					</div>
 				</div>

@@ -14,7 +14,9 @@
 	{{task.getPriority()}}
 	{{task.getDateStarted()}}
 	{{task.getDateCompleted()}}
-	
+	<p>
+		<a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a>
+	</p>
 	<p>
 		<a class="links" href="{{ path('tms_tasks_manager_homepage', { 'username': app.user.username }) }}">Return to your Task list</a>
 		or 
