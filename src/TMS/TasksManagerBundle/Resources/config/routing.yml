@@ -11,3 +11,9 @@ tms_tasks_manager_show:
 tms_tasks_manager_create:
     pattern:  /tasks/create
     defaults: { _controller: TMSTasksManagerBundle:Default:create }
+
+tms_tasks_manager_delete:
+    pattern:  /tasks/{taskid}/delete
+    defaults: { _controller: TMSTasksManagerBundle:Default:delete }
+    requirements:
+        taskid:  \d+

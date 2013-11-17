@@ -48,4 +48,19 @@ class DefaultController extends Controller
 		
 		return $this->render('TMSTasksManagerBundle:Default:create.html.twig', array('creation_form' => $creation_form->createView()));
 	}
+	
+	public function deleteAction($taskid)
+	{
+		$user = $this->getUser();
+		$em = $this->getDoctrine()->getManager();
+	
+		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $taskid);
+		
+		if ($task !== null)
+		{
+			$em->remove($task);
+			$em->flush();
+		}
+		return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
+	}
 }
