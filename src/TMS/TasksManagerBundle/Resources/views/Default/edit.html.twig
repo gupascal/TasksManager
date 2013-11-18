@@ -1,0 +1,18 @@
+{# src/TMS/TasksManagerBundle/Resources/views/Default/edit.html.twig #}
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ app.user.username }} - Edit Task{% endblock %}
+	
+{% block content %}			
+	{{ form_start(edit_form) }}
+		{{ form_errors(edit_form) }}
+		
+		{{ form_row(edit_form.name) }}
+		{{ form_row(edit_form.priority) }}
+		{{ form_row(edit_form.due_date) }}
+		{{ form_row(edit_form.description) }}
+		{{ form_row(edit_form.submit) }}
+	{{ form_end(edit_form) }}
+	
+	<a class="links" href="{{ path('tms_users_dashboard') }}">Return to Dashboard</a>
+{% endblock %}

@@ -51,6 +51,30 @@ class DefaultController extends Controller
 		return $this->render('TMSTasksManagerBundle:Default:create.html.twig', array('creation_form' => $creation_form->createView()));
 	}
 	
+	public function editAction($taskid)
+	{
+		$user = $this->getUser();
+	
+		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $taskid);
+	
+		$edit_form = $this->createForm(new CreateTaskType(), $task);
+		
+		$edit_form->handleRequest($this->getRequest());
+		
+		if ($edit_form->isValid())
+		{
+			$task = $edit_form->getData();
+			$task->setUser($this->getUser());
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($task);
+			$em->flush();
+			
+			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
+		}
+		
+		return $this->render('TMSTasksManagerBundle:Default:edit.html.twig', array('edit_form' => $edit_form->createView()));
+	}
+	
 	public function deleteAction($taskid)
 	{
 		$user = $this->getUser();
