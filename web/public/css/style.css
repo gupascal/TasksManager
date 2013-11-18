@@ -15,8 +15,17 @@ a {
 
 .links {
 	color: #081b7e;
+	font-weight: bold;
 }
 
 p {
 	margin: 5px 0;
+}
+
+footer {
+	text-align: center;
+}
+
+#main, header, footer {
+	border-radius: 10px;
 }

@@ -15,9 +15,9 @@
 {% block content %}
 	<div id="user">
 		{% if is_granted('ROLE_USER') %}
-			<a href="{{ path('tms_users_dashboard') }}">Why returning here ? Go to your Dashboard !</a>
+			<a class="links" href="{{ path('tms_users_dashboard') }}">Why returning here ? Go to your Dashboard !</a>
 		{% else %}
-			<a href="{{ path('login') }}">Already register ? Log in</a>
+			<a class="links" href="{{ path('login') }}">Already register ? Log in</a>
 	</div>
 	<div id="signupForm">
 		{{ form_start(signup_form) }}

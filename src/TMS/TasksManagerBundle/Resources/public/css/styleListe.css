@@ -21,6 +21,7 @@ header, footer {
 	border-bottom: 1px solid #aeaeae;
 	height: 60px;
 	padding-left: 10px;
+	border-radius: 10px 10px 0 0;
 }
 
 section {
