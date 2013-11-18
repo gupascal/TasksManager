@@ -9,33 +9,34 @@
 {% endblock %}
 	
 {% block header %}
-	<img src="{{ asset('images/profil.png') }}" alt="profil photo" />
+	<p><a class="links" href="{{ path('tms_users_dashboard') }}"><img src="{{ asset('public/images/logoTaskManager.png') }}" alt="logo TaskManager" /></a></p>
 	<p>{{ app.user.username }}</p>
-	{#<a href="{{ path('Default') }}">Manage your profil</a>#}
-	<a href="{{ path('logout') }}">Logout</a>
-	<a class="links" href="{{ path('tms_tasks_manager_create') }}">Create a new Task</a>
+	<p><a href="{{ path('logout') }}">Logout</a></p>
 {% endblock %}
 	
 {% block content %}
 	<div id="filters">
 		Filtres de tri
 	</div>
+	<p><a class="links" href="{{ path('tms_tasks_manager_create') }}">Create a new Task</a></p>
 	<section>
-		<p>Next your Task List :</p>
+		<p>Tasks</p>
 		{% for task in tasks %}
 			<div class="task">
 				<div class="nameTask">
 					<p><a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
 					<p>Priority: {{task.getPriority()}}</p>
+					{% if task.getDateStarted() == null %}
+						<p>Not Begin</p>
+					{% else %}
+						<p>Begin the: {{task.getDateStarted()|date('m/d/Y H:i')}}</p>
+					{% endif %}
+					<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
 				</div>
 				<div class="descriptionTask">
 					{{task.getDescription()}}
 				</div>
-				<div class="progressTask">
-					<p>
-						{{task.getDateStarted()}}
-						{{task.getDateCompleted()}}
-					</p>
+				<div class="actionTask">
 					<p>
 						<a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a>
 					</p>
@@ -43,5 +44,4 @@
 			</div>
 		{% endfor %}
 	</section>
-	<a class="links" href="{{ path('tms_users_dashboard', { 'username': app.user.username }) }}">Return to Dashboard</a>
 {% endblock %}

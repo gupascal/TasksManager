@@ -1,24 +1,33 @@
 {# src/TMS/UsersBundle/Resources/views/Default/index.html.twig #}
 {% extends "::layout.html.twig" %}
 
-{% block title %}Task Manager{% endblock %}
+{% block Stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/tmsusers/css/styleIndex.css')  }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block title %}Task Manager - Home Page{% endblock %}
+
+{% block header %}
+	<p>TaskManager is an online task manager that allow you to store and edit numerous tasks. It can also be use as a reminder !</p>
+{% endblock %}
 
 {% block content %}
-	{% if is_granted('ROLE_USER') %}
-		<a href="{{ path('tms_users_dashboard') }}">Go to your Dashboard</a>
-	{% else %}
-		<a href="{{ path('login') }}">Already register ? Log in</a>
-	
-	
-	{{ form_start(signup_form) }}
-		{{ form_errors(signup_form) }}
-		
-		{{ form_row(signup_form.username) }}
-		{{ form_row(signup_form.email) }}
-		{{ form_row(signup_form.password) }}
-		{{ form_row(signup_form.submit, {'label': 'Sign Up'}) }}
-	{{ form_end(signup_form) }}
-	{% endif %}
-	
-	{#<a href="{{ path('tms_users_dashboard') }}">Link to your Dashboard</a>#}
+	<div id="user">
+		{% if is_granted('ROLE_USER') %}
+			<a href="{{ path('tms_users_dashboard') }}">Why returning here ? Go to your Dashboard !</a>
+		{% else %}
+			<a href="{{ path('login') }}">Already register ? Log in</a>
+	</div>
+	<div id="signupForm">
+		{{ form_start(signup_form) }}
+			{{ form_errors(signup_form) }}
+			
+			{{ form_row(signup_form.username) }}
+			{{ form_row(signup_form.email) }}
+			{{ form_row(signup_form.password) }}
+			{{ form_row(signup_form.submit, {'label': 'Sign Up'}) }}
+		{{ form_end(signup_form) }}
+		{% endif %}
+	</div>
 {% endblock %}

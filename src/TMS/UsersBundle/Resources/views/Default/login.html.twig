@@ -2,18 +2,22 @@
 {% extends "::layout.html.twig" %}
 	
 {% block title %}Task Manager - Login{% endblock %}
-	
-{% block content %}
-{% if error %}
-    <div>{{ error.message }}</div>
-{% endif %}
 
-{{ form_start(login_form) }}
-		{{ form_errors(login_form) }}
-		
-		{{ form_row(login_form.username, { 'attr': {'value': last_username } }) }}
-		{{ form_row(login_form.password) }}
-		{{ form_row(login_form.submit, {'label': 'Sign In'}) }}
-{{ form_end(login_form) }}
-	
+{% block header %}
+	<p>TaskManager is an online task manager that allow you to store and edit numerous tasks. It can also be use as a reminder !</p>
+{% endblock %}
+
+{% block content %}
+	{% if error %}
+		<div>{{ error.message }}</div>
+	{% endif %}
+	<div id="loginForm">
+		{{ form_start(login_form) }}
+				{{ form_errors(login_form) }}
+				
+				{{ form_row(login_form.username, { 'attr': {'value': last_username } }) }}
+				{{ form_row(login_form.password) }}
+				{{ form_row(login_form.submit, {'label': 'Sign In'}) }}
+		{{ form_end(login_form) }}
+	</div>
 {% endblock %}

@@ -4,22 +4,42 @@
 {% block title %}{{ app.user.username }} - Task: {{ task.getName() }}{% endblock %}
 
 {% block header %}
-	<a href="{{ path('logout') }}">Logout</a>
+	<p><a class="links" href="{{ path('tms_users_dashboard') }}"><img src="{{ asset('public/images/logoTaskManager.png') }}" alt="logo TaskManager" /></a></p>
+	<p>{{ app.user.username }}</p>
+	<p><a href="{{ path('logout') }}">Logout</a></p>
 {% endblock %}
 
 {% block content %}
-	<p>Task :</p>
-	{{task.getName()}}
-	{{task.getDescription()}}
-	{{task.getPriority()}}
-	{{task.getDateStarted()}}
-	{{task.getDateCompleted()}}
+	<h1>{{task.getName()}}</h1>
+	<div id="mainInformation">
+		<div id="priority">
+			<p>Priority: {{task.getPriority()}}</p>
+		</div>
+		<div id="dueDate">
+			<p>Due Date: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
+		</div>
+		<div id="beginEndDates">
+			{% if task.getDateStarted() == null %}
+				<p>Begin the: Not Begin</p>
+			{% else %}
+				<p>Begin the: {{task.getDateStarted()|date('m/d/Y H:i')}}</p>
+			{% endif %}
+			{% if task.getDateCompleted() == null %}
+				<p>Finished the: Not Finished</p>
+			{% else %}
+				<p>Finished the: {{task.getDateCompleted()|date('m/d/Y H:i')}}</p>
+			{% endif %}
+		</div>
+	</div>
+	<div id="description">
+		{{task.getDescription()}}
+	</div>
+	<div id="actions">
+		<p>
+			<a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a>
+		</p>
+	</div>
 	<p>
-		<a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a>
-	</p>
-	<p>
-		<a class="links" href="{{ path('tms_tasks_manager_homepage', { 'username': app.user.username }) }}">Return to your Task list</a>
-		or 
-		<a class="links" href="{{ path('tms_users_dashboard', { 'username': app.user.username }) }}">Return to your Dashboard</a>
+		<a class="links" href="{{ path('tms_tasks_manager_homepage') }}">Return to your Task list</a>
 	<p>
 {% endblock %}

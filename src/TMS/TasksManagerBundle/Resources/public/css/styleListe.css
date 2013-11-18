@@ -34,7 +34,7 @@ section {
 	border: 1px solid #aeaeae;
 }
 
-.nameTask , .descriptionTask, .progressTask {
+.nameTask , .descriptionTask, .actionTask {
 	height: 100px;
 	display: inline-block;
 	float: left;
@@ -50,7 +50,7 @@ section {
 	width: 45%;
 }
 
-.progressTask {
+.actionTask {
 	width: 22%;
 }
 

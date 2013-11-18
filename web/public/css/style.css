@@ -1,6 +1,7 @@
 html, body {
 	margin: 0;
-	background: #eeeeee
+	background: #eeeeee;
+	min-width: 600px;
 }
 
 strong {
