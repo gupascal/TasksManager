@@ -12,6 +12,10 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+		if ($this->get('security.context')->isGranted('ROLE_USER')) {
+			return $this->redirect($this->generateUrl('tms_users_dashboard'));
+		}
+	
 		$em = $this->getDoctrine()->getManager();
 	
 		$signup_form = $this->createForm(new UserSignUpType(), new User());
