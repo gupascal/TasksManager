@@ -14,10 +14,7 @@
 
 {% block content %}
 	<div id="user">
-		{% if is_granted('ROLE_USER') %}
-			<a class="links" href="{{ path('tms_users_dashboard') }}">Why returning here ? Go to your Dashboard !</a>
-		{% else %}
-			<a class="links" href="{{ path('login') }}">Already register ? Log in</a>
+		<p><a class="links" href="{{ path('login') }}">Already register ? Log in</a></p>
 	</div>
 	<div id="signupForm">
 		{{ form_start(signup_form) }}
@@ -28,6 +25,5 @@
 			{{ form_row(signup_form.password) }}
 			{{ form_row(signup_form.submit, {'label': 'Sign Up'}) }}
 		{{ form_end(signup_form) }}
-		{% endif %}
 	</div>
 {% endblock %}
