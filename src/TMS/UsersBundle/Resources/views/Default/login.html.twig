@@ -3,6 +3,11 @@
 	
 {% block title %}Task Manager - Login{% endblock %}
 
+{% block Stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/tmsusers/css/styleIndex.css')  }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block header %}
 	<p>TaskManager is an online task manager that allow you to store and edit numerous tasks. It can also be use as a reminder !</p>
 {% endblock %}

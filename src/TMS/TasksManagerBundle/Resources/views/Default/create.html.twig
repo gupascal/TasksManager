@@ -3,6 +3,11 @@
 
 {% block title %}{{ app.user.username }} - Create New Task{% endblock %}
 
+{% block Stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/tmstasksmanager/css/styleCreate.css')  }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block header %}
 	<p><a class="links" href="{{ path('tms_users_dashboard') }}"><img src="{{ asset('public/images/logoTaskManager.png') }}" alt="logo TaskManager" /></a></p>
 	<p>{{ app.user.username }}</p>

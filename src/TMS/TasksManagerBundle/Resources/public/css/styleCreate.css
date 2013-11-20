@@ -1,0 +1,15 @@
+div {
+	margin: 10px auto;
+}
+
+#main {
+	margin: 50px 0;
+}
+
+header, footer {
+	margin: 10px;
+    padding: 10px;
+	background: #d9e6ff;
+	border: 1px solid #b1cbff;
+	height: 80px;
+}
