@@ -96,22 +96,19 @@ class TaskRepository extends EntityRepository
 			return false;
 	
 		// Check the due date regarding the current task and its own dependencies
-		$dep_tasks = $task->getDepTasks();
-		$dep_tasks_id = array();
-		foreach ($dep_tasks as $dt) {
-			$dep_tasks_id[] = $dt->getId();
-		}
-		if ($dep_tasks_id === array())
-			return true;
+		$qb = $this->createQueryBuilder('t')
+					->innerJoin('t.dep_tasks', 'dt');
+		$res = $qb->where('t.id = :id')
+					->setParameter('id', $task->getId())
+					->andWhere('dt.due_date >= :dueDate')
+					->setParameter('dueDate', $task->getDueDate())
+					->orderBy('dt.due_date', 'DESC')
+					->setMaxResults(1)
+					->getQuery()
+					->getOneOrNullResult();
 		
-		$qb = $this->createQueryBuilder('t');
-		$res = $qb->where($qb->expr()->in('t.id', ':ids'))
-						->setParameter('ids', $dep_tasks_id)
-						->orderBy('t.due_date', 'DESC')
-						->setMaxResults(1)
-						->getQuery()
-						->getOneOrNullResult();
-						
-		return ($res === null ||  $task->getDueDate() > $res->getDueDate());
+		if ($res !== null)
+			return false;
+		return true;
 	}
 }
