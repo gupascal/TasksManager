@@ -3,6 +3,12 @@
 
 {% block title %}{{ app.user.username }} - Task: {{ task.getName() }}{% endblock %}
 
+{% block Stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/tmstasksmanager/css/styleListe.css')  }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('bundles/tmstasksmanager/css/styleShow.css')  }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block header %}
 	<p><a class="links" href="{{ path('tms_users_dashboard') }}"><img src="{{ asset('public/images/logoTaskManager.png') }}" alt="logo TaskManager" /></a></p>
 	<p>{{ app.user.username }}</p>
@@ -32,12 +38,13 @@
 		</div>
 	</div>
 	<div id="description">
-		{{task.getDescription()}}
+		<h2>Description:</h2>
+		<p>{{task.getDescription()}}</p>
 	</div>
 	<div id="actions">
-		<p>
-			<a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a>
-		</p>
+		<h3>Possibles Actions:</h3>
+		<p>- <a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>
+		<p>- <a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a></p>
 	</div>
 	<p>
 		<a class="links" href="{{ path('tms_tasks_manager_homepage') }}">Return to your Task list</a>
