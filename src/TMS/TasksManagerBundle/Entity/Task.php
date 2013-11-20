@@ -50,6 +50,20 @@ class Task
 	 */
 	protected $date_completed;
 	
+	 /**
+     * @ORM\ManyToMany(targetEntity="Task", inversedBy="related_tasks")
+     * @ORM\JoinTable(name="Tasks_dependencies",
+     *      joinColumns={@ORM\JoinColumn(name="task_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="dep_task_id", referencedColumnName="id")}
+     *      )
+     */
+	 protected $dep_tasks;
+	 
+	 /**
+     * @ORM\ManyToMany(targetEntity="Task", mappedBy="dep_tasks")
+     */
+	 protected $related_tasks;
+	
 	/**
      * @ORM\ManyToOne(targetEntity="TMS\UsersBundle\Entity\User", inversedBy="tasks")
      * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
@@ -226,5 +240,79 @@ class Task
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dep_tasks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add dep_tasks
+     *
+     * @param \TMS\TasksManagerBundle\Entity\Task $depTasks
+     * @return Task
+     */
+    public function addDepTask(\TMS\TasksManagerBundle\Entity\Task $depTasks)
+    {
+        $this->dep_tasks[] = $depTasks;
+    
+        return $this;
+    }
+
+    /**
+     * Remove dep_tasks
+     *
+     * @param \TMS\TasksManagerBundle\Entity\Task $depTasks
+     */
+    public function removeDepTask(\TMS\TasksManagerBundle\Entity\Task $depTasks)
+    {
+        $this->dep_tasks->removeElement($depTasks);
+    }
+
+    /**
+     * Get dep_tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDepTasks()
+    {
+        return $this->dep_tasks;
+    }
+
+    /**
+     * Add related_tasks
+     *
+     * @param \TMS\TasksManagerBundle\Entity\Task $relatedTasks
+     * @return Task
+     */
+    public function addRelatedTask(\TMS\TasksManagerBundle\Entity\Task $relatedTasks)
+    {
+        $this->related_tasks[] = $relatedTasks;
+    
+        return $this;
+    }
+
+    /**
+     * Remove related_tasks
+     *
+     * @param \TMS\TasksManagerBundle\Entity\Task $relatedTasks
+     */
+    public function removeRelatedTask(\TMS\TasksManagerBundle\Entity\Task $relatedTasks)
+    {
+        $this->related_tasks->removeElement($relatedTasks);
+    }
+
+    /**
+     * Get related_tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRelatedTasks()
+    {
+        return $this->related_tasks;
     }
 }

@@ -22,7 +22,7 @@ class DefaultController extends Controller
 		$user = $this->getUser();
 	
 		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $taskid);
-		
+
 		// Redirect if the task doesn't exist
 		if ($task === null) {
 			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
@@ -41,9 +41,14 @@ class DefaultController extends Controller
 		{
 			$task = $creation_form->getData();
 			$task->setUser($this->getUser());
-			$em = $this->getDoctrine()->getManager();
-			$em->persist($task);
-			$em->flush();
+			
+			// Check due date
+			if ($this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->taskHasValidDueDate($task))
+			{
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($task);
+				$em->flush();
+			}
 			
 			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
 		}
@@ -65,9 +70,14 @@ class DefaultController extends Controller
 		{
 			$task = $edit_form->getData();
 			$task->setUser($this->getUser());
-			$em = $this->getDoctrine()->getManager();
-			$em->persist($task);
-			$em->flush();
+			
+			// Check due date
+			if ($this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->taskHasValidDueDate($task))
+			{
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($task);
+				$em->flush();
+			}
 			
 			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
 		}
@@ -89,4 +99,5 @@ class DefaultController extends Controller
 		}
 		return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
 	}
+	
 }
