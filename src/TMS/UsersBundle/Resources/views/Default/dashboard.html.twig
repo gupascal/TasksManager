@@ -22,7 +22,7 @@
 		{% for task in next_tasks %}
 			<div class="task">
 				<div class="nameTask">
-					<p><a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
+					<p><a class="showLink" href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
 					<p>Priority: {{task.getPriority()}}</p>
 					{% if task.getDateStarted() == null %}
 						<p>Not Begin</p>
@@ -47,7 +47,7 @@
 		{% for task in tasks_in_progress %}
 			<div class="task">
 					<div class="nameTask">
-						<p><a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
+						<p><a class="showLink" href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
 						<p>Priority: {{task.getPriority()}}</p>
 						{% if task.getDateStarted() == null %}
 							<p>Not Begin</p>
