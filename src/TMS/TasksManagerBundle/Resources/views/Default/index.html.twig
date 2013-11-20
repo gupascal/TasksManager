@@ -24,7 +24,7 @@
 		{% for task in tasks %}
 			<div class="task">
 				<div class="nameTask">
-					<p><a href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
+					<p><a class="showLink" href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
 					<p>Priority: {{task.getPriority()}}</p>
 					{% if task.getDateStarted() == null %}
 						<p>Not Begin</p>
@@ -37,9 +37,8 @@
 					{{task.getDescription()}}
 				</div>
 				<div class="actionTask">
-					<p>
-						<a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a>
-					</p>
+					<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>
+					<p><a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a></p>
 				</div>
 			</div>
 		{% endfor %}

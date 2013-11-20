@@ -2,17 +2,28 @@
 {% extends "::layout.html.twig" %}
 
 {% block title %}{{ app.user.username }} - Edit Task{% endblock %}
-	
-{% block content %}			
-	{{ form_start(edit_form) }}
-		{{ form_errors(edit_form) }}
-		
-		{{ form_row(edit_form.name) }}
-		{{ form_row(edit_form.priority) }}
-		{{ form_row(edit_form.due_date) }}
-		{{ form_row(edit_form.description) }}
-		{{ form_row(edit_form.submit) }}
-	{{ form_end(edit_form) }}
-	
-	<a class="links" href="{{ path('tms_users_dashboard') }}">Return to Dashboard</a>
+
+{% block Stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/tmstasksmanager/css/styleTaskAction.css')  }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block header %}
+	<p><a class="links" href="{{ path('tms_users_dashboard') }}"><img src="{{ asset('public/images/logoTaskManager.png') }}" alt="logo TaskManager" /></a></p>
+	<p>{{ app.user.username }}</p>
+	<p><a href="{{ path('logout') }}">Logout</a></p>
+{% endblock %}
+
+{% block content %}
+	<div class="form">
+		{{ form_start(edit_form) }}
+			{{ form_errors(edit_form) }}
+			
+			{{ form_row(edit_form.name) }}
+			{{ form_row(edit_form.priority) }}
+			{{ form_row(edit_form.due_date) }}
+			{{ form_row(edit_form.description) }}
+			{{ form_row(edit_form.submit) }}
+		{{ form_end(edit_form) }}
+	</div>
 {% endblock %}
