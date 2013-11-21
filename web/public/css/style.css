@@ -34,6 +34,10 @@ footer {
 	border-radius: 10px;
 }
 
+#imgLogout {
+	border-radius: 3px;
+}
+
 /* Form style */
 .form{
 	background: #74a0e8;
