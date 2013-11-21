@@ -13,3 +13,35 @@ header, footer {
 	border: 1px solid #b1cbff;
 	height: 80px;
 }
+
+/*#task_create_dep_tasks {
+	width: 200px;
+}*/
+
+.form {
+	width: 400px;
+	padding: 20px 10px;
+}
+
+.form div {
+	width: 300px;
+}
+
+input {
+	width: 280px;
+	height: 35px;
+}
+
+.form button {
+	width: 300px;
+}
+
+select {
+	width: 50px;
+	height: 23px;
+}
+
+textarea, #task_create_dep_tasks {
+	width: 300px;
+	height: 90px;
+}

@@ -26,12 +26,12 @@
 		</div>
 		<div id="beginEndDates">
 			{% if task.getDateStarted() == null %}
-				<p>Begin the: Not Begin</p>
+				<p>Not Begin</p>
 			{% else %}
-				<p>Begin the: {{task.getDateStarted()|date('m/d/Y H:i')}}</p>
+				<p>Begined the: {{task.getDateStarted()|date('m/d/Y H:i')}}</p>
 			{% endif %}
 			{% if task.getDateCompleted() == null %}
-				<p>Finished the: Not Finished</p>
+				<p>Not Finished yet</p>
 			{% else %}
 				<p>Finished the: {{task.getDateCompleted()|date('m/d/Y H:i')}}</p>
 			{% endif %}
