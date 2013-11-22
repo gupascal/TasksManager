@@ -44,31 +44,33 @@
 			</div>
 		{% endfor %}
 	</section>
-	<section>
-		<p>5 Tasks in progress :</p>
-		{% for task in tasks_in_progress %}
-			<div class="task">
-					<div class="nameTask">
-						<p><a class="showLink" href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
-						<p>Priority: {{task.getPriority()}}</p>
-						{% if task.getDateStarted() == null %}
-							<p>Not Begin</p>
-						{% else %}
-							<p>Begin the: {{task.getDateStarted()|date('m/d/Y H:i')}}</p>
-						{% endif %}
-						<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
+	{% if tasks_in_progress != null %}
+		<section>
+			<p>5 Tasks in progress :</p>
+			{% for task in tasks_in_progress %}
+				<div class="task">
+						<div class="nameTask">
+							<p><a class="showLink" href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
+							<p>Priority: {{task.getPriority()}}</p>
+							{% if task.getDateStarted() == null %}
+								<p>Not Begin</p>
+							{% else %}
+								<p>Begin the: {{task.getDateStarted()|date('m/d/Y H:i')}}</p>
+							{% endif %}
+							<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
+						</div>
+						<div class="descriptionTask">
+							{{task.getDescription()}}
+						</div>
+						<div class="depTask">
+							{#TODO#}
+						</div>
+						<div class="actionTask">
+							<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>
+							<p><a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a></p>
+						</div>
 					</div>
-					<div class="descriptionTask">
-						{{task.getDescription()}}
-					</div>
-					<div class="depTask">
-						{#TODO#}
-					</div>
-					<div class="actionTask">
-						<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>
-						<p><a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a></p>
-					</div>
-				</div>
-		{% endfor %}
-	</section>
+			{% endfor %}
+		</section>
+	{% endif %}
 {% endblock %}
