@@ -111,4 +111,17 @@ class TaskRepository extends EntityRepository
 			return false;
 		return true;
 	}
+		
+	public function findTasksThatCanBeAddedAsDependencies($username, $task)
+	{
+		$qb = $this->createQueryBuilder('t')
+					->innerJoin('t.dep_tasks', 'dt');
+		$this->whereUserIs($qb, $username);
+		return $qb->andWhere('t.id = :id')
+						->setParameter('id',  $task->getId())
+						->andWhere('dt.due_date < :dueDate')
+						->setParameter('dueDate', $task->getDueDate())
+						->getQuery()
+						->getResult();
+	}
 }
