@@ -1,0 +1,17 @@
+header p {
+	float: left;
+}
+
+.logout {
+	float: right;
+}
+
+.logout a {
+	color: #081B7E;
+	font-weight: bold;
+}
+
+.logo {
+	width: 48%;
+	text-align: center;
+}
