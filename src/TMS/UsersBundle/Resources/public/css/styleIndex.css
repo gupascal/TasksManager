@@ -9,14 +9,3 @@ div {
 #user {
 	text-align: center;
 }
-
-header {
-	color: #313939;
-	padding: 3px 2px;
-	text-align: center;
-	background: #74a0e8;
-	width: 800px;
-	margin: 0 auto;
-	border-radius: 0 0 15px 15px;
-	box-shadow: 2px 2px 1px #a5a5a5;
-}

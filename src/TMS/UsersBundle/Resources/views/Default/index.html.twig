@@ -1,5 +1,5 @@
 {# src/TMS/UsersBundle/Resources/views/Default/index.html.twig #}
-{% extends "::layout.html.twig" %}
+{% extends "::anonymousLayout.html.twig" %}
 
 {% block Stylesheets %}
 	{{ parent() }}
@@ -7,10 +7,6 @@
 {% endblock %}
 
 {% block title %}Task Manager - Home Page{% endblock %}
-
-{% block header %}
-	<p>TaskManager is an online task manager that allow you to store and edit numerous tasks. It can also be use as a reminder !</p>
-{% endblock %}
 
 {% block content %}
 	<div id="user">

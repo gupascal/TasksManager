@@ -1,17 +1,11 @@
 {# src/TMS/TasksManagerBundle/Resources/views/Default/edit.html.twig #}
-{% extends "::layout.html.twig" %}
+{% extends "::userLayout.html.twig" %}
 
 {% block title %}{{ app.user.username }} - Edit Task{% endblock %}
 
 {% block Stylesheets %}
 	{{ parent() }}
 	<link href="{{ asset('bundles/tmstasksmanager/css/styleTaskAction.css')  }}" rel="stylesheet" type="text/css">
-{% endblock %}
-
-{% block header %}
-	<p><a class="links" href="{{ path('tms_users_dashboard') }}"><img src="{{ asset('public/images/logoTaskManager.png') }}" alt="logo TaskManager" /></a></p>
-	<p>{{ app.user.username }}</p>
-	<p><a href="{{ path('logout') }}"><img id="imgLogout" alt="logout icon" src="{{ asset('public/images/logout.png')  }}"/> Logout</a></p>
 {% endblock %}
 
 {% block content %}

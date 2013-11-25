@@ -1,0 +1,13 @@
+{# app/Resources/views/userLayout.html.twig #}
+{% extends "::layout.html.twig" %}
+
+{% block Stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('public/css/styleUser.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block header %}
+	<p class="logo" ><a class="links" href="{{ path('tms_users_dashboard') }}"><img src="{{ asset('public/images/logoTaskManager.png') }}" alt="logo TaskManager" /></a></p>
+	<p>{{ app.user.username }}</p>
+	<p class="logout" ><a href="{{ path('logout') }}"><img id="imgLogout" alt="logout icon" src="{{ asset('public/images/logout.png')  }}"/> Logout</a></p>
+{% endblock %}

@@ -1,0 +1,11 @@
+{# app/Resources/views/anonymousLayout.html.twig #}
+{% extends "::layout.html.twig" %}
+
+{% block Stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('public/css/styleAnonymous.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block header %}
+	<p>TaskManager is an online task manager that allow you to store and edit numerous tasks. It can also be use as a reminder !</p>
+{% endblock %}
