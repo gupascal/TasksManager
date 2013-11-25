@@ -116,7 +116,7 @@ class DefaultController extends Controller
 		$em = $this->getDoctrine()->getManager();
 	
 		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $taskid);
-		$deps = $em->getRepository('TMSTasksManagerBundle:Task')->findTasksThatCanBeAddedAsDependencies($user->getUsername(), $task);
+		$deps = $em->getRepository('TMSTasksManagerBundle:Task')->findPossibleDependencies($user->getUsername(), $task);
 		
 		$response = array('taskid' => $id, 'deps' => $deps);
 		return new Response(json_encode($response)); 

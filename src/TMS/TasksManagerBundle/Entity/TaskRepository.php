@@ -112,7 +112,7 @@ class TaskRepository extends EntityRepository
 		return true;
 	}
 		
-	public function findTasksThatCanBeAddedAsDependencies($username, $task)
+	public function findPossibleDependencies($username, $task)
 	{
 		$qb = $this->createQueryBuilder('t')
 					->innerJoin('t.dep_tasks', 'dt');
