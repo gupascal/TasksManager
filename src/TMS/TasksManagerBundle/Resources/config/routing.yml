@@ -24,14 +24,22 @@ tms_tasks_manager_delete:
     requirements:
         taskid:  \d+
 
-tms_tasks_manager_homepage_add_dep_form:
+
+# Task dependencies related routes
+tms_tasks_manager_add_dep_form:
     pattern:  /tasks/add-dep-form
     defaults: { _controller: TMSTasksManagerBundle:Default:addDependenciesForm }
     requirements:
         _method: POST
 
-tms_tasks_manager_show_add_dep_form:
-    pattern:  /tasks/{taskid}/add-dep-form
-    defaults: { _controller: TMSTasksManagerBundle:Default:addDependenciesForm }
+tms_tasks_manager_add_dep:
+    pattern:  /tasks/add-dep
+    defaults: { _controller: TMSTasksManagerBundle:Default:addDependencies }
+    requirements:
+        _method: POST
+
+tms_tasks_manager_remove_dep:
+    pattern:  /tasks/remove-dep
+    defaults: { _controller: TMSTasksManagerBundle:Default:removeDependencies }
     requirements:
         _method: POST

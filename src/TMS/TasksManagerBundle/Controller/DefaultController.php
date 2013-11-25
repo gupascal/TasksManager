@@ -115,10 +115,59 @@ class DefaultController extends Controller
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
 	
-		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $taskid);
-		$deps = $em->getRepository('TMSTasksManagerBundle:Task')->findTasksThatCanBeAddedAsDependencies($user->getUsername(), $task);
+		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
+		$deps = $em->getRepository('TMSTasksManagerBundle:Task')->findPossibleDependencies($user->getUsername(), $task);
 		
 		$response = array('taskid' => $id, 'deps' => $deps);
 		return new Response(json_encode($response)); 
+	}
+	
+	public function addDependenciesAction()
+	{
+		$request = $this->container->get('request');
+
+		if(!$request->isXmlHttpRequest()) {
+			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
+		}
+		
+		$id = (int)$request->query()->get('taskid');
+		$new_deps = $request->query()->get('new_deps');
+		
+		$user = $this->getUser();
+		$em = $this->getDoctrine()->getManager();
+		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
+		
+		foreach ($new_deps as $new_dep) {
+			$task->addDepTask($em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $new_dep));
+		}
+		
+		$em->persist($task);
+		$em->flush();
+		
+		$response = array('taskid' => $id, 'deps' => $deps);
+		return new Response(json_encode($response)); 
+	}
+	
+	public function removeDependenciesAction()
+	{
+		$request = $this->container->get('request');
+
+		if(!$request->isXmlHttpRequest()) {
+			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
+		}
+		
+		$id = (int)$request->query()->get('taskid');
+		$dep_id = (int)$request->query()->get('dep_id');
+		
+		$user = $this->getUser();
+		$em = $this->getDoctrine()->getManager();
+		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
+		$task->removeDepTask($em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $dep_id));
+		
+		$em->persist($task);
+		$em->flush();
+		
+		$response = array('taskid' => $id);
+		return new Response(json_encode($response));
 	}
 }
