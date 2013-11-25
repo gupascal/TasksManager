@@ -35,3 +35,15 @@ tms_tasks_manager_show_add_dep_form:
     defaults: { _controller: TMSTasksManagerBundle:Default:addDependenciesForm }
     requirements:
         _method: POST
+
+tms_tasks_manager_homepage_add_dep:
+    pattern:  /tasks/add-dep
+    defaults: { _controller: TMSTasksManagerBundle:Default:addDependencies }
+    requirements:
+#        _method: POST
+
+tms_tasks_manager_show_add_dep:
+    pattern:  /tasks/{taskid}/add-dep
+    defaults: { _controller: TMSTasksManagerBundle:Default:addDependencies }
+    requirements:
+#        _method: POST
