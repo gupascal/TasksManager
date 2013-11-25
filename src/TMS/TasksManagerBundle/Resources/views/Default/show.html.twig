@@ -12,7 +12,7 @@
 {% block header %}
 	<p><a class="links" href="{{ path('tms_users_dashboard') }}"><img src="{{ asset('public/images/logoTaskManager.png') }}" alt="logo TaskManager" /></a></p>
 	<p>{{ app.user.username }}</p>
-	<p><a href="{{ path('logout') }}">Logout</a></p>
+	<p><a href="{{ path('logout') }}"><img id="imgLogout" alt="logout icon" src="{{ asset('public/images/logout.png')  }}"/> Logout</a></p>
 {% endblock %}
 
 {% block content %}
