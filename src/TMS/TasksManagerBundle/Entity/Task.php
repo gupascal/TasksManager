@@ -247,6 +247,8 @@ class Task
      */
     public function __construct()
     {
+		$this->due_date = new \DateTime("tomorrow");
+	
         $this->dep_tasks = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
