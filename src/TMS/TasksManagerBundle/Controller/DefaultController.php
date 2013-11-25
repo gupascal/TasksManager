@@ -147,4 +147,27 @@ class DefaultController extends Controller
 		$response = array('taskid' => $id, 'deps' => $deps);
 		return new Response(json_encode($response)); 
 	}
+	
+	public function removeDependenciesAction()
+	{
+		$request = $this->container->get('request');
+
+		if(!$request->isXmlHttpRequest()) {
+			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
+		}
+		
+		$id = (int)$request->query()->get('taskid');
+		$dep_id = (int)$request->query()->get('dep_id');
+		
+		$user = $this->getUser();
+		$em = $this->getDoctrine()->getManager();
+		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
+		$task->removeDepTask($em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $dep_id));
+		
+		$em->persist($task);
+		$em->flush();
+		
+		$response = array('taskid' => $id);
+		return new Response(json_encode($response));
+	}
 }
