@@ -3,6 +3,7 @@
 namespace TMS\TasksManagerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use TMS\TasksManagerBundle\Entity\Task;
 use TMS\TasksManagerBundle\Form\Type\CreateTaskType;
 
@@ -100,4 +101,24 @@ class DefaultController extends Controller
 		return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
 	}
 	
+	
+	public function addDependenciesFormAction()
+	{
+		$request = $this->container->get('request');
+
+		if(!$request->isXmlHttpRequest()) {
+			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
+		}
+		
+		$id = (int)$request->query()->get('taskid');
+		
+		$user = $this->getUser();
+		$em = $this->getDoctrine()->getManager();
+	
+		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $taskid);
+		$deps = $em->getRepository('TMSTasksManagerBundle:Task')->findTasksThatCanBeAddedAsDependencies($user->getUsername(), $task);
+		
+		$response = array('taskid' => $id, 'deps' => $deps);
+		return new Response(json_encode($response)); 
+	}
 }

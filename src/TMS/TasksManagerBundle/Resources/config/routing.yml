@@ -23,3 +23,15 @@ tms_tasks_manager_delete:
     defaults: { _controller: TMSTasksManagerBundle:Default:delete }
     requirements:
         taskid:  \d+
+
+tms_tasks_manager_homepage_add_dep_form:
+    pattern:  /tasks/add-dep-form
+    defaults: { _controller: TMSTasksManagerBundle:Default:addDependenciesForm }
+    requirements:
+        _method: POST
+
+tms_tasks_manager_show_add_dep_form:
+    pattern:  /tasks/{taskid}/add-dep-form
+    defaults: { _controller: TMSTasksManagerBundle:Default:addDependenciesForm }
+    requirements:
+        _method: POST
