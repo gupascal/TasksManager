@@ -8,12 +8,10 @@
 	<link href="{{ asset('bundles/tmsusers/css/styleDashboard.css')  }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
-{#{% block header %}
-{#	<p><a class="links" href="{{ path('tms_users_dashboard') }}"><img src="{{ asset('public/images/logoTaskManager.png') }}" alt="logo TaskManager" /></a></p>
-{#	<p>{{ app.user.username }}</p>
-{#	<p><a class="links" href="{{ path('tms_tasks_manager_homepage') }}">Go to your Task list</a></p>
-{#	<p><a href="{{ path('logout') }}"><img id="imgLogout" alt="logout icon" src="{{ asset('public/images/logout.png')  }}"/> Logout</a></p>
-{#{% endblock %}#}
+{% block header %}
+	{{ parent() }}
+	<p class="list" ><a class="links" href="{{ path('tms_tasks_manager_homepage') }}">Go to your Task list</a></p>
+{% endblock %}
 
 {% block content %}
 	<p><a class="links" href="{{ path('tms_tasks_manager_create') }}">Create a new Task</a></p>
