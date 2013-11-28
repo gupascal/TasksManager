@@ -15,3 +15,38 @@ header p {
 	width: 48%;
 	text-align: center;
 }
+
+#deletePopUp {
+	position:fixed;
+	top: 35%;
+	left: 35%;
+	width: 30%;
+	height: 25%;
+	background: #74a0e8;
+	margin: 0 auto;
+	padding: 10px 10px;
+	border-radius: 10px;
+	min-width: 300px;
+	box-shadow: 3px 3px 1px #a5a5a5;
+}
+
+#deletePopUp p {
+	text-align: center;
+	margin: 10px 0;
+	font-size: 17px;
+}
+
+#deletePopUp p a {
+	margin-left: 15px;
+	border: 1px solid;
+	border-radius: 5px;
+	padding: 3px 5px;
+}
+
+#deleteTask {
+	color: green;
+}
+
+#keepTask {
+	color: red;
+}

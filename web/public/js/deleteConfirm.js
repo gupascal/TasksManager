@@ -28,13 +28,16 @@ function confirmDelete(e)
 	
 	var acceptLink = document.createElement('a');
     acceptLink.href  = targ;
-    acceptLink.title = 'delete_task';
+    acceptLink.title = 'Delete Task';
+	acceptLink.id = 'deleteTask';
 	acceptLink.appendChild(textNodes[1]);
 	choice.appendChild(acceptLink);
 	
 	var refuseLink = document.createElement('a');
     refuseLink.href  = '#';
-    refuseLink.title = 'keep_task';
+	refuseLink.onclick = destroyPopUp;
+    refuseLink.title = 'Keep Task';
+	refuseLink.id = 'keepTask';
 	refuseLink.appendChild(textNodes[2]);
 	choice.appendChild(refuseLink);
 	
@@ -42,6 +45,14 @@ function confirmDelete(e)
 	divPopUp.appendChild(choice);
 	
 	document.body.appendChild(divPopUp);
+}
+
+function destroyPopUp()
+{
+	var body = document.body
+	var popUp = document.getElementById("deletePopUp");
+
+	body.removeChild(popUp);
 }
 			
 function addEvent(elem, event, action)
