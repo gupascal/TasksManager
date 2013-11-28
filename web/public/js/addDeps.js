@@ -1,12 +1,12 @@
 // Ajoute les évènements liés aux boutons de delete des tasks
-var aAddDepts = document.getElementsByTagName('a');	
-for (var i = 0 ; i < aAddDepts.length ; i++)
+var aAddDeps = document.getElementsByTagName('a');	
+for (var i = 0 ; i < aAddDeps.length ; i++)
 {
-	if (aAddDepts[i].classList.contains('addDeps')) {
-		addEvent(aAddDepts[i], 'click', addDeps);
+	if (aAddDeps[i].classList.contains('addDeps')) {
+		addEvent(aAddDeps[i], 'click', addDeps);
 	}
 }
-
+alert("b");
 function addDeps(e)
 {
 	var targ = getTarget(e);
@@ -15,10 +15,10 @@ function addDeps(e)
 	// Avec le parametre taskid
 	// Appel la methode showFormAddDepths lors de la réponse
 	// type de réponse : json
-    $.post('{{path('tms_tasks_manager_add_dep_form')}}',               
+    /*s$.post('{{path('tms_tasks_manager_add_dep_form')}}',               
           {taskid: 'taskid'}, //> remplacer par l'id de la tache
           showFormAddDeps,
-		  "json");    
+		  "json");   */ 
 }
 
 function showFormAddDeps(answer)
