@@ -1,15 +1,44 @@
 // Ajoute les évènements liés aux boutons de delete des tasks
-var aDeleteTask = document.getElementsByTagName('a');	
-for (var i = 0 ; i < aDeleteTask.length ; i++)
+var aAddDepts = document.getElementsByTagName('a');	
+for (var i = 0 ; i < aAddDepts.length ; i++)
 {
-	if (aDeleteTask[i].classList.contains('deleteBtn')) {
-		addEvent(aDeleteTask[i], 'click', confirmDelete);
+	if (aAddDepts[i].classList.contains('addDeps')) {
+		addEvent(aAddDepts[i], 'click', addDeps);
 	}
 }
 
-function confirmDelete(e)
+function addDeps(e)
 {
 	var targ = getTarget(e);
+	
+	// Envoi un formulaire post vers le lien tms_tasks_manager_add_dep_form
+	// Avec le parametre taskid
+	// Appel la methode showFormAddDepths lors de la réponse
+	// type de réponse : json
+    $.post('{{path('tms_tasks_manager_add_dep_form')}}',               
+          {taskid: 'taskid'}, //> remplacer par l'id de la tache
+          showFormAddDeps,
+		  "json");    
+}
+
+function showFormAddDeps(answer)
+{
+    if(answer.id != null && answer.deps != null)	//dummy check
+	{
+		//do something
+    }
+}
+
+/*function confirmDelete(e)
+{
+	e.preventDefault();	// On bloque l'action par défaut de cet élément
+	
+	var targ;
+	if (!e) var e = window.event;
+	if (e.target) targ = e.target;
+	else if (e.srcElement) targ = e.srcElement;
+	if (targ.nodeType == 3) // defeat Safari bug
+		targ = targ.parentNode;
 	// targ contient le lien de suppression de la tache
 	
 	// Div principale du message à afficher
@@ -55,4 +84,4 @@ function destroyPopUpDeleteThisTask()
 	var popUp = document.getElementById("deletePopUp");
 
 	body.removeChild(popUp);
-}
+}*/
