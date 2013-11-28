@@ -6,6 +6,10 @@
 	<link href="{{ asset('public/css/styleUser.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('public/js/deleteConfirm.js') }}" ></script>
+{% endblock %}
+
 {% block header %}
 	<p class="logo" ><a class="links" href="{{ path('tms_users_dashboard') }}"><img src="{{ asset('public/images/logoTaskManager.png') }}" alt="logo TaskManager" /></a></p>
 	<p>{{ app.user.username }}</p>

@@ -38,7 +38,7 @@
 	<div id="actions">
 		<h3>Possibles Actions:</h3>
 		<p>- <a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>
-		<p>- <a class="links" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a></p>
+		<p>- <a class="links deleteBtn" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a></p>
 	</div>
 	<p>
 		<a class="links" href="{{ path('tms_tasks_manager_homepage') }}">Return to your Task list</a>
