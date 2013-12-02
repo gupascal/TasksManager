@@ -1,5 +1,5 @@
 {# src/TMS/UsersBundle/Resources/views/Default/dashboard.html.twig #}
-{% extends "::userLayout.html.twig" %}
+{% extends "::tasksJsActions.html.twig" %}
 
 {% block title %}{{ app.user.username }} - Dashboard{% endblock %}
 
@@ -33,7 +33,8 @@
 					{{task.getDescription()}}
 				</div>
 				<div class="depTask">
-					<p><a class="links addDeps" id="{{ task.getId() }}" href="#">Add</a></p>
+					<p><a class="links addDeps" id="{{ task.getId() }}" href="#">Add Dependences</a></p>
+					<p><a class="links removeDeps" id="{{ task.getId() }}" href="#">Remove Dependences</a></p>
 				</div>
 				<div class="actionTask">
 					<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>
@@ -61,7 +62,8 @@
 							{{task.getDescription()}}
 						</div>
 						<div class="depTask">
-							<p><a class="links addDeps" id="{{ task.getId() }}" href="#">Add</a></p>
+							<p><a class="links addDeps" id="{{ task.getId() }}" href="#">Add Dependences</a></p>
+							<p><a class="links removeDeps" id="{{ task.getId() }}" href="#">Remove Dependences</a></p>
 						</div>
 						<div class="actionTask">
 							<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>
