@@ -130,8 +130,8 @@ class DefaultController extends Controller
 			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
 		}
 		
-		$id = (int)$request->query->get('taskid');
-		$new_deps = $request->query->get('new_deps');
+		$id = (int)$request->request->get('taskid');
+		$new_deps = $request->request->get('new_deps');
 		
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
