@@ -6,7 +6,7 @@ for (var i = 0 ; i < aAddDeps.length ; i++)
 		addEvent(aAddDeps[i], 'click', addDeps);
 	}
 }
-alert("b");
+
 function addDeps(e)
 {
 	var targ = getTarget(e);
@@ -15,73 +15,80 @@ function addDeps(e)
 	// Avec le parametre taskid
 	// Appel la methode showFormAddDepths lors de la réponse
 	// type de réponse : json
-    /*s$.post('{{path('tms_tasks_manager_add_dep_form')}}',               
-          {taskid: 'taskid'}, //> remplacer par l'id de la tache
+    $.post("{{path('tms_tasks_manager_add_dep_form')}}",               
+          {taskid: targ.id }, //> remplacer par l'id de la tache
           showFormAddDeps,
-		  "json");   */ 
+		  "json");
 }
 
 function showFormAddDeps(answer)
 {
-    if(answer.id != null && answer.deps != null)	//dummy check
-	{
-		//do something
-    }
-}
-
-/*function confirmDelete(e)
-{
-	e.preventDefault();	// On bloque l'action par défaut de cet élément
-	
-	var targ;
-	if (!e) var e = window.event;
-	if (e.target) targ = e.target;
-	else if (e.srcElement) targ = e.srcElement;
-	if (targ.nodeType == 3) // defeat Safari bug
-		targ = targ.parentNode;
-	// targ contient le lien de suppression de la tache
-	
 	// Div principale du message à afficher
 	var divPopUp = document.createElement('div');
-	divPopUp.id = 'deletePopUp';
+	divPopUp.id = 'addDepsForm';
 	
 	// Chaines de textes
 	var textNodes = [
-		document.createTextNode('Confirm you want to delete this Task ?'),
-		document.createTextNode('Yes'),
-		document.createTextNode('No')
+		document.createTextNode('Choose task dependances :'),
+		document.createTextNode('Cancel')
 	];
 	
+	// Paragraphe d'introduction
 	var message = document.createElement('p');
 	message.appendChild(textNodes[0]);
 	
-	var choice = document.createElement('p');
 	
-	var acceptLink = document.createElement('a');
-    acceptLink.href  = targ;
-    acceptLink.title = 'Delete Task';
-	acceptLink.id = 'deleteTask';
-	acceptLink.appendChild(textNodes[1]);
-	choice.appendChild(acceptLink);
+	// Paragraphe du formulaire de choix des dépendances
+	var choseDeps = document.createElement('p');
+	
+	var form = document.createElement('form');
+	form.action  = tms_tasks_manager_add_dep;
+	form.enctype = 'multipart/form-data';
+	form.method  = 'post';
+	
+	// Boucle pour afficher toutes les taches possibles
+	for (var i = 0 ; i < answer.deps.length ; i++)
+	{
+		var checkBox = document.createElement('input');
+		checkBox.type = 'checkbox';
+		checkBox.id   = 'checkBox'+i;
+		checkBox.name = input.id;
+		
+		var nameTask = document.createElement('p');
+		nameTask.appendChild(answer.deps.getName());
+	}
+	
+	var submit = document.createElement('input');
+	submit.type  = 'submit';
+	submit.value = 'Add';
+	form.appendChild(submit);
+	
+	choseDeps.appendChild(form);
+	
+	// Paragraphe final
+	var cancel = document.createElement('p');
 	
 	var refuseLink = document.createElement('a');
-    refuseLink.href  = '#';
-	refuseLink.onclick = destroyPopUpDeleteThisTask;
-    refuseLink.title = 'Keep Task';
-	refuseLink.id = 'keepTask';
-	refuseLink.appendChild(textNodes[2]);
-	choice.appendChild(refuseLink);
+	refuseLink.href  = '#';
+	refuseLink.onclick = destroyPopUpAddDepsTask;
+	refuseLink.id = 'cancel';
+	refuseLink.appendChild(textNodes[1]);
 	
+	cancel.appendChild(refuseLink);
+	
+	// Ajout de tous les paragraphes
 	divPopUp.appendChild(message);
-	divPopUp.appendChild(choice);
+	divPopUp.appendChild(choseDeps);
+	divPopUp.appendChild(cancel);
 	
+	// Ajout au body
 	document.body.appendChild(divPopUp);
 }
 
-function destroyPopUpDeleteThisTask()
+function destroyPopUpAddDepsTask()
 {
 	var body = document.body
-	var popUp = document.getElementById("deletePopUp");
+	var popUp = document.getElementById("addDepsForm");
 
 	body.removeChild(popUp);
-}*/
+}

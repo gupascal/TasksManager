@@ -105,12 +105,12 @@ class DefaultController extends Controller
 	public function addDependenciesFormAction()
 	{
 		$request = $this->container->get('request');
-
+		
 		if(!$request->isXmlHttpRequest()) {
 			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
 		}
 		
-		$id = (int)$request->query()->get('taskid');
+		$id = (int)$request->request->get('taskid');
 		
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
@@ -130,8 +130,8 @@ class DefaultController extends Controller
 			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
 		}
 		
-		$id = (int)$request->query()->get('taskid');
-		$new_deps = $request->query()->get('new_deps');
+		$id = (int)$request->query->get('taskid');
+		$new_deps = $request->query->get('new_deps');
 		
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
