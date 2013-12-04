@@ -8,11 +8,6 @@
 	<link href="{{ asset('bundles/tmsusers/css/styleDashboard.css')  }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
-{% block header %}
-	{{ parent() }}
-	<p class="list" ><a class="links" href="{{ path('tms_tasks_manager_homepage') }}">Go to your Task list</a></p>
-{% endblock %}
-
 {% block content %}
 	<p><a class="links" href="{{ path('tms_tasks_manager_create') }}">Create a new Task</a></p>
 	<section>

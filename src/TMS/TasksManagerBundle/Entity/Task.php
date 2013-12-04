@@ -76,6 +76,11 @@ class Task implements JsonSerializable
         return array(
             'id' => $this->id,
             'name'=> $this->name,
+			'priority'=> $this->priority,
+			'due_date'=> $this->due_date,
+			'description'=> $this->description,
+			'date_started'=> $this->date_started,
+			'date_completed'=> $this->date_completed
         );
     }
 
