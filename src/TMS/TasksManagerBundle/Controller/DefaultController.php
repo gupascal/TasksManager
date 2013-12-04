@@ -117,8 +117,14 @@ class DefaultController extends Controller
 	
 		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
 		$deps = $em->getRepository('TMSTasksManagerBundle:Task')->findPossibleDependencies($user->getUsername(), $task);
+
+		// serialize all entities
+		$serializedTasks = array();
+		foreach ($deps as $task) {
+			$serializedTasks[] = json_encode($task);
+		}
 		
-		$response = array('taskid' => $id, 'deps' => $deps);
+		$response = array('taskid' => $id, 'deps' => $serializedTasks);
 		return new Response(json_encode($response)); 
 	}
 	

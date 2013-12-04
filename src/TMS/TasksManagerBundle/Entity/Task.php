@@ -2,13 +2,14 @@
 namespace TMS\TasksManagerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="TMS\TasksManagerBundle\Entity\TaskRepository")
  * @ORM\Table(name="tasks")
  */
-class Task
+class Task implements JsonSerializable
 {
     /**
      * @ORM\Column(type="integer")
@@ -70,6 +71,13 @@ class Task
      */
 	 protected $user;
 	
+	public function jsonSerialize()
+    {
+        return array(
+            'id' => $this->id,
+            'name'=> $this->name,
+        );
+    }
 
     /**
      * Get id
