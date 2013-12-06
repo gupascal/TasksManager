@@ -43,9 +43,10 @@ function showFormAddDeps(answer)
 	
 	// Formulaire de choix des dépendances
 	var form = document.createElement('form');
-	form.action  = addDepsAction;
+	form.action  = '';
 	form.enctype = 'multipart/form-data';
 	form.method  = 'post';
+	form.onsubmit = addTasksToDB;
 	
 	var selectTasks = document.createElement('select');
 	selectTasks.multiple = "multiple";
@@ -58,7 +59,7 @@ function showFormAddDeps(answer)
 		
 		// Cré une option au select
 		var optionTask = document.createElement('option');
-		optionTask.value = task_deserialise.name;
+		optionTask.value = task_deserialise.id;
 		optionTask.appendChild( document.createTextNode( task_deserialise.name ) );
 		
 		// Ajoute l'option au select
@@ -66,6 +67,13 @@ function showFormAddDeps(answer)
 	}
 	
 	form.appendChild(selectTasks);
+	
+	// Champs caché contenant l'id de la task à laquelle on veut ajouter des dépendances
+	var idTaskAsker = document.createElement('input');
+	idTaskAsker.type  = 'hidden';
+	idTaskAsker.id  = 'taskAsker';
+	idTaskAsker.appendChild( document.createTextNode( answer.taskid ) );
+	form.appendChild(idTaskAsker);
 	
 	var submit = document.createElement('input');
 	submit.type  = 'submit';
@@ -98,4 +106,36 @@ function destroyPopUpAddDepsTask()
 	var popUp = document.getElementById("addDepsForm");
 
 	body.removeChild(popUp);
+}
+
+function addTasksToDB(e)
+{
+	// Récupère l'id de la tache à laquelle on ajoute des dépendances
+   var idTask = document.getElementById('taskAsker');
+   // Récupère les options du formulaire d'ajout de dépendance
+   var tasks = document.getElementsByTagName('option');
+   
+   // Initialise arrayTask avec les taches dépendantes sélectionnées
+   var arrayTask = new Array();
+   for (var i = 0 ; i < tasks.length ; i++)
+   {
+		if (tasks[i].selected)
+			arrayTask.push(tasks[i].value);
+   }
+   
+   // Envoi le formulaire au back-end pour l'ajouter à la DB
+   	$.post(addDepsAction,               
+		  { taskid: idTask.innerHTML,
+			new_deps: arrayTask
+			},
+		  addDepsInList,
+		  "json");
+	
+	// Détruit la PopUp
+	destroyPopUpAddDepsTask();
+}
+
+function addDepsInList(answer)
+{
+	// TODO later
 }
