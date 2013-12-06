@@ -11,6 +11,7 @@ class UserSignUpType extends AbstractType
         $builder->add('email', 'email')
 				->add('username', 'text')
 				->add('password', 'password')
+				->add('password_', 'password', array("mapped" => false))
 				->add('submit', 'submit');
     }
 
