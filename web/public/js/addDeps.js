@@ -15,21 +15,24 @@ function addDeps(e)
 	// Avec le parametre taskid
 	// Appel la methode showFormAddDepths lors de la réponse
 	// type de réponse : json
-    $.post("{{path('tms_tasks_manager_add_dep_form')}}",               
-          {taskid: targ.id }, //> remplacer par l'id de la tache
-          showFormAddDeps,
+	$.post(addDepsFormAction,               
+		  { taskid: targ.id },
+		  showFormAddDeps,
 		  "json");
 }
 
 function showFormAddDeps(answer)
 {
+	if (answer.taskid == null && answer.deps == null)
+		return;
+		
 	// Div principale du message à afficher
 	var divPopUp = document.createElement('div');
 	divPopUp.id = 'addDepsForm';
 	
 	// Chaines de textes
 	var textNodes = [
-		document.createTextNode('Choose task dependances :'),
+		document.createTextNode('Choose task dependences :'),
 		document.createTextNode('Cancel')
 	];
 	
@@ -38,32 +41,36 @@ function showFormAddDeps(answer)
 	message.appendChild(textNodes[0]);
 	
 	
-	// Paragraphe du formulaire de choix des dépendances
-	var choseDeps = document.createElement('p');
-	
+	// Formulaire de choix des dépendances
 	var form = document.createElement('form');
-	form.action  = tms_tasks_manager_add_dep;
+	form.action  = addDepsAction;
 	form.enctype = 'multipart/form-data';
 	form.method  = 'post';
+	
+	var selectTasks = document.createElement('select');
+	selectTasks.multiple = "multiple";
 	
 	// Boucle pour afficher toutes les taches possibles
 	for (var i = 0 ; i < answer.deps.length ; i++)
 	{
-		var checkBox = document.createElement('input');
-		checkBox.type = 'checkbox';
-		checkBox.id   = 'checkBox'+i;
-		checkBox.name = input.id;
+		// Déserialize le tableau reçu
+		var task_deserialise = JSON.parse(answer.deps[i]);
 		
-		var nameTask = document.createElement('p');
-		nameTask.appendChild(answer.deps.getName());
+		// Cré une option au select
+		var optionTask = document.createElement('option');
+		optionTask.value = task_deserialise.name;
+		optionTask.appendChild( document.createTextNode( task_deserialise.name ) );
+		
+		// Ajoute l'option au select
+		selectTasks.appendChild(optionTask);
 	}
+	
+	form.appendChild(selectTasks);
 	
 	var submit = document.createElement('input');
 	submit.type  = 'submit';
 	submit.value = 'Add';
 	form.appendChild(submit);
-	
-	choseDeps.appendChild(form);
 	
 	// Paragraphe final
 	var cancel = document.createElement('p');
@@ -78,7 +85,7 @@ function showFormAddDeps(answer)
 	
 	// Ajout de tous les paragraphes
 	divPopUp.appendChild(message);
-	divPopUp.appendChild(choseDeps);
+	divPopUp.appendChild(form);
 	divPopUp.appendChild(cancel);
 	
 	// Ajout au body

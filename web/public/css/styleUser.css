@@ -16,12 +16,13 @@ header p {
 	text-align: center;
 }
 
-#deletePopUp {
-	position:fixed;
-	top: 35%;
-	left: 35%;
-	width: 30%;
-	height: 25%;
+.list {
+	position: relative;
+	top: 20px;
+	left: -75px;
+}
+
+#deletePopUp, #addDepsForm  {
 	background: #74a0e8;
 	margin: 0 auto;
 	padding: 10px 10px;
@@ -30,7 +31,27 @@ header p {
 	box-shadow: 3px 3px 1px #a5a5a5;
 }
 
-#deletePopUp p {
+#deletePopUp {
+	position:fixed;
+	top: 35%;
+	left: 35%;
+	min-width: 400px;
+	width: 30%;
+	min-height: 75px;
+	height: 10%;
+}
+
+#addDepsForm  {
+	position:fixed;
+	top: 15%;
+	left: 35%;
+	min-width: 400px;
+	width: 30%;
+	min-height: 325px;
+	height: 47%;
+}
+
+#deletePopUp p, #addDepsForm p  {
 	text-align: center;
 	margin: 10px 0;
 	font-size: 17px;
@@ -43,10 +64,40 @@ header p {
 	padding: 3px 5px;
 }
 
-#deleteTask {
-	color: green;
+#keepTask, #cancel {
+	background: #C32C21;
+	background-image: -o-linear-gradient(bottom, #C32C21 0%, #A55940 100%);
+	background-image: -moz-linear-gradient(bottom, #C32C21 0%, #A55940 100%);
+	background-image: -webkit-linear-gradient(bottom, #C32C21 0%, #A55940 100%);
+	background-image: -ms-linear-gradient(bottom, #C32C21 0%, #A55940 100%);
+	background-image: linear-gradient(to bottom, #C32C21 0%, #A55940 100%);
+	border-radius: 5px;
+	font-weight: bold;
+	color: white;
+	border: none;
+	box-shadow: 2px 2px 1px #a5a5a5;
 }
 
-#keepTask {
-	color: red;
+#addDepsForm p a {
+	border: 1px solid;
+	border-radius: 5px;
+	padding: 3px 5px;
+	/*width: 190px;*/
+}
+
+#addDepsForm  form input[type="submit"] {
+	margin: 15px auto;
+}
+
+#addDepsForm  form {
+	width: 350px;
+	min-width: 350px;
+	margin: 5px auto;
+}
+
+#addDepsForm  form select {
+	height: 200px;
+	width: 350px;
+	margin: 0 auto;
+	border-radius: 5px;
 }
