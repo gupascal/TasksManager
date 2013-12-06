@@ -9,3 +9,16 @@ div {
 #user {
 	text-align: center;
 }
+
+.notification {
+	text-align: center;
+	font-weight: bold;
+}
+
+.good {
+	color: green;
+}
+
+.bad {
+	color: red;
+}
