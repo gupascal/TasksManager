@@ -59,7 +59,6 @@ header p {
 
 #deletePopUp p a {
 	margin-left: 15px;
-	border: 1px solid;
 	border-radius: 5px;
 	padding: 3px 5px;
 }
@@ -79,10 +78,8 @@ header p {
 }
 
 #addDepsForm p a {
-	border: 1px solid;
 	border-radius: 5px;
 	padding: 3px 5px;
-	/*width: 190px;*/
 }
 
 #addDepsForm  form input[type="submit"] {
