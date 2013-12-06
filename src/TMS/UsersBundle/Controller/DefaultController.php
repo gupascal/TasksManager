@@ -22,21 +22,31 @@ class DefaultController extends Controller
 		
 		$signup_form->handleRequest($this->getRequest());
 		
+		$isRegistratedUser = false;
+		$registrationSucceded = false;
 		if ($signup_form->isValid()) {
 			$user = $signup_form->getData();
-			if ($em->getRepository('TMSUsersBundle:User')->isNotRegistratedUser($user))
+			$isRegistratedUser = $em->getRepository('TMSUsersBundle:User')->isNotRegistratedUser($user);
+			if ($isRegistratedUser)
 			{
-				$factory = $this->get('security.encoder_factory');
-				$encoder = $factory->getEncoder($user);
-				$password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-				$user->setPassword($password);
-				
-				$em->persist($user);
-				$em->flush();
+				if ($signup_form['password_']->getData() && $signup_form['password_']->getData() == $user->getPassword())
+				{
+					$factory = $this->get('security.encoder_factory');
+					$encoder = $factory->getEncoder($user);
+					$password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+					$user->setPassword($password);
+					
+					$em->persist($user);
+					$em->flush();
+					$registrationSucceded = true;
+				}
 			}
 		}
 		
-        return $this->render('TMSUsersBundle:Default:index.html.twig', array('signup_form' => $signup_form->createView()));
+        return $this->render('TMSUsersBundle:Default:index.html.twig', array('signup_form' => $signup_form->createView(),
+																			 'form_submitted' => $signup_form->isValid(),
+																			 'username_or_email_already_used' => $isRegistratedUser,
+																			 'registration_succeded' => $registrationSucceded));
     }
 	
 	public function loginAction()
