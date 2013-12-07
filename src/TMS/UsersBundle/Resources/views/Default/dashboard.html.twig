@@ -26,7 +26,7 @@
 						<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
 					</div>
 					<div class="descriptionTask">
-						{{task.getDescription()}}
+						<p>{{task.getDescription()}}</p>
 					</div>
 					<div class="depTask">
 						<p><a class="links addDeps" id="{{ task.getId() }}" href="#">Add Dependences</a></p>
@@ -67,7 +67,7 @@
 							<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
 						</div>
 						<div class="descriptionTask">
-							{{task.getDescription()}}
+							<p>{{task.getDescription()}}</p>
 						</div>
 						<div class="depTask">
 							<p><a class="links addDeps" id="{{ task.getId() }}" href="#">Add Dependences</a></p>

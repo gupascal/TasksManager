@@ -11,7 +11,7 @@
 
 {% block content %}
 	<h1>{{task.getName()}}</h1>
-	<div id="mainInformation">
+	<div id="mainInformations">
 		<div id="priority">
 			<p>Priority: {{task.getPriority()}}</p>
 		</div>
@@ -31,14 +31,34 @@
 			{% endif %}
 		</div>
 	</div>
-	<div id="description">
-		<h2>Description:</h2>
-		<p>{{task.getDescription()}}</p>
+	<div id="moreInformations">
+		<div id="description">
+			<h2>Description:</h2>
+			<p>{{task.getDescription()}}</p>
+		</div>
+		<div id="depTask">
+			{% if task.getDepTasks()|length != 0 %}
+				{% if task.getDepTasks()|length > 1 %}
+					<p>Dependent tasks:</p>
+				{% else %}
+					<p>Dependent task:</p>
+				{% endif %}
+				<div id="depTaskList" >
+					{% for depTask in task.getDepTasks() %}
+						<p>
+							<a class="removeDeps" id="{{ task.getId() }}_{{ depTask.getId() }}" href="#">
+								<img alt="delete cross" src="{{ asset('public/images/delete.png') }}"/>
+							</a> 
+							{{depTask.getName()}}
+						</p>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
 	</div>
 	<div id="actions">
 		<h3>Possibles Actions:</h3>
 		<p>- <a class="links addDeps" id="{{ task.getId() }}" href="#">Add Dependences</a></p>
-		<p>- <a class="links removeDeps" id="{{ task.getId() }}" href="#">Remove Dependences</a></p>
 		<p>- <a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit Task</a></p>
 		<p>- <a class="links deleteBtn" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete Task</a></p>
 	</div>
