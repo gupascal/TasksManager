@@ -5,9 +5,11 @@
 	<script>
 		var addDepsFormAction = "{{path('tms_tasks_manager_add_dep_form')}}";
 		var addDepsAction = "{{ path('tms_tasks_manager_add_dep') }}";
+		var removeDepAction = "{{ path('tms_tasks_manager_remove_dep') }}";
 	</script>
 	<script type="text/javascript" src="{{ asset('public/js/jquery-2.min.js') }}" ></script>
 	<script type="text/javascript" src="{{ asset('public/js/eventManager.js') }}" ></script>
 	<script type="text/javascript" src="{{ asset('public/js/deleteConfirm.js') }}" ></script>
 	<script type="text/javascript" src="{{ asset('public/js/addDeps.js') }}" ></script>
+	<script type="text/javascript" src="{{ asset('public/js/deleteDeps.js') }}" ></script>
 {% endblock %}

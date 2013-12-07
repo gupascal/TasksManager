@@ -41,7 +41,12 @@
 					{% if task.getDepTasks()|length != 0 %}
 						<div class="depList" >
 							{% for depTask in task.getDepTasks() %}
-								<p><a class="removeDeps" value="{{ depTask.getId() }}" href="#"><img alt="delete cross" src="{{ asset('public/images/delete.png') }}"/></a> {{depTask.getName()}}</p>
+								<p>
+									<a class="removeDeps" id="{{ task.getId() }}_{{ depTask.getId() }}" href="#">
+										<img alt="delete cross" src="{{ asset('public/images/delete.png') }}"/>
+									</a> 
+									{{depTask.getName()}}
+								</p>
 							{% endfor %}
 						</div>
 					{% endif %}

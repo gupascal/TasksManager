@@ -1,4 +1,4 @@
-// Ajoute les évènements liés aux boutons de delete des tasks
+// Ajoute les évènements liés aux boutons d'ajout de dépendances entre tâches
 var aAddDeps = document.getElementsByTagName('a');	
 for (var i = 0 ; i < aAddDeps.length ; i++)
 {
