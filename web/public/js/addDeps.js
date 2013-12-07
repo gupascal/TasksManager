@@ -9,8 +9,8 @@ for (var i = 0 ; i < aAddDeps.length ; i++)
 
 function addDeps(e)
 {
+	e.preventDefault();	// On bloque l'action par défaut de cet élément
 	var targ = getTarget(e);
-
 	// Envoi un formulaire post vers le lien tms_tasks_manager_add_dep_form
 	// Avec le parametre taskid
 	// Appel la methode showFormAddDepths lors de la réponse
@@ -130,12 +130,10 @@ function addTasksToDB(e)
 			},
 		  addDepsInList,
 		  "json");
-	
-	// Détruit la PopUp
-	destroyPopUpAddDepsTask();
 }
 
 function addDepsInList(answer)
 {
-	// TODO later
+	// Détruit la PopUp
+	destroyPopUpAddDepsTask();
 }

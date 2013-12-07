@@ -9,6 +9,7 @@ for (var i = 0 ; i < aDeleteDeps.length ; i++)
 
 function deleteDep(e)
 {
+	e.preventDefault();	// On bloque l'action par défaut de cet élément
 	var targ = getTarget(e);
 	var ids = String(targ.parentNode.id).split("_", 2);
 

@@ -9,6 +9,7 @@ for (var i = 0 ; i < aDeleteTask.length ; i++)
 
 function confirmDelete(e)
 {
+	e.preventDefault();	// On bloque l'action par défaut de cet élément
 	var targ = getTarget(e);
 	// targ contient le lien de suppression de la tache
 	

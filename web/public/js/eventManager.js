@@ -8,8 +8,6 @@ function addEvent(elem, event, action)
 
 function getTarget(e)
 {
-	e.preventDefault();	// On bloque l'action par défaut de cet élément
-	
 	var targ;
 	if (!e) var e = window.event;
 	if (e.target) targ = e.target;
