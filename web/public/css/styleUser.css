@@ -22,6 +22,22 @@ header p {
 	left: -75px;
 }
 
+.depList {
+	height: 55px;
+	max-height: 55px;
+	max-width: 300px;
+	overflow:auto;
+	border: 1px solid #aeaeae;
+	border-radius: 5px;
+	padding: 4px;
+}
+
+.depList p{
+	margin: 0;
+	width: 250px;
+	max-width: 250px;
+}
+
 #deletePopUp, #addDepsForm  {
 	background: #74a0e8;
 	margin: 0 auto;

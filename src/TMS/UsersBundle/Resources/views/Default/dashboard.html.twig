@@ -30,7 +30,13 @@
 					</div>
 					<div class="depTask">
 						<p><a class="links addDeps" id="{{ task.getId() }}" href="#">Add Dependences</a></p>
-						<p><a class="links removeDeps" id="{{ task.getId() }}" href="#">Remove Dependences</a></p>
+						{% if task.getDepTasks()|length != 0 %}
+							<div class="depList" >
+								{% for depTask in task.getDepTasks() %}
+									<p><a class="removeDeps" value="{{ depTask.getId() }}" href="#"><img alt="delete cross" src="{{ asset('public/images/delete.png') }}"/></a> {{depTask.getName()}}</p>
+								{% endfor %}
+							</div>
+						{% endif %}
 					</div>
 					<div class="actionTask">
 						<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>
@@ -60,7 +66,13 @@
 						</div>
 						<div class="depTask">
 							<p><a class="links addDeps" id="{{ task.getId() }}" href="#">Add Dependences</a></p>
-							<p><a class="links removeDeps" id="{{ task.getId() }}" href="#">Remove Dependences</a></p>
+							{% if task.getDepTasks()|length != 0 %}
+								<div class="depList" >
+									{% for depTask in task.getDepTasks() %}
+										<p><a class="removeDeps" value="{{ depTask.getId() }}" href="#"><img alt="delete cross" src="{{ asset('public/images/delete.png') }}"/></a> {{depTask.getName()}}</p>
+									{% endfor %}
+								</div>
+							{% endif %}
 						</div>
 						<div class="actionTask">
 							<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>

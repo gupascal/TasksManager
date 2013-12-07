@@ -14,7 +14,13 @@
 	</div>
 	<p><a class="links" href="{{ path('tms_tasks_manager_create') }}">Create a new Task</a></p>
 	<section>
-		<p>Tasks</p>
+		{% if tasks != null %}
+			{% if tasks|length != 1 %}
+				<p>Tasks :</p>
+			{% else %}
+				<p>Task :</p>
+			{% endif %}
+		{% endif %}
 		{% for task in tasks %}
 			<div class="task">
 				<div class="nameTask">
@@ -31,8 +37,14 @@
 					{{task.getDescription()}}
 				</div>
 				<div class="depTask">
-					<p><a class="links addDeps" id="{{ task.getId() }}" href="#">Add Dependences</a></p>
-					<p><a class="links removeDeps" id="{{ task.getId() }}" href="#">Remove Dependences</a></p>
+					<p><a class="addDeps links" id="{{ task.getId() }}" href="#">Add Dependences</a></p>
+					{% if task.getDepTasks()|length != 0 %}
+						<div class="depList" >
+							{% for depTask in task.getDepTasks() %}
+								<p><a class="removeDeps" value="{{ depTask.getId() }}" href="#"><img alt="delete cross" src="{{ asset('public/images/delete.png') }}"/></a> {{depTask.getName()}}</p>
+							{% endfor %}
+						</div>
+					{% endif %}
 				</div>
 				<div class="actionTask">
 					<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>

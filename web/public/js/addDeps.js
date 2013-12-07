@@ -10,7 +10,7 @@ for (var i = 0 ; i < aAddDeps.length ; i++)
 function addDeps(e)
 {
 	var targ = getTarget(e);
-	
+
 	// Envoi un formulaire post vers le lien tms_tasks_manager_add_dep_form
 	// Avec le parametre taskid
 	// Appel la methode showFormAddDepths lors de la réponse
