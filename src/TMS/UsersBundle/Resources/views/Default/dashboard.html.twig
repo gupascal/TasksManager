@@ -15,7 +15,7 @@
 			<p>Next 5 Tasks :</p>
 			{% for task in next_tasks %}
 				<div class="task">
-					<div class="nameTask">
+					<div class="infosTask">
 						<p><a class="showLink" href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
 						<p>Priority: {{task.getPriority()}}</p>
 						{# Si la tâche est commencée #}
@@ -72,7 +72,7 @@
 			<p>5 Tasks in progress :</p>
 			{% for task in tasks_in_progress %}
 				<div class="task">
-						<div class="nameTask">
+						<div class="infosTask">
 							<p><a class="showLink" href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
 							<p>Priority: {{task.getPriority()}}</p>
 							{# Si la tâche est commencée #}

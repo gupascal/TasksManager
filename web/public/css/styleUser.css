@@ -41,14 +41,14 @@ header p {
 	border: 1px solid #aeaeae;
 }
 
-.nameTask , .descriptionTask, .actionTask, .depTask {
+.infosTask , .descriptionTask, .actionTask, .depTask {
 	height: 100%;
 	display: inline-block;
 	float: left;
 	padding-left: 10px;
 }
 
-.nameTask {
+.infosTask {
 	width: 20%;
 	background: #dde7f6;
 }
