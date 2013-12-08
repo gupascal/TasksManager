@@ -26,12 +26,28 @@
 				<div class="nameTask">
 					<p><a class="showLink" href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
 					<p>Priority: {{task.getPriority()}}</p>
+					{# Si la tâche est commencée #}
 					{% if task.getDateStarted() == null %}
-						<p>Not Begin</p>
-					{% else %}
-						<p>Begin the: {{task.getDateStarted()|date('m/d/Y H:i')}}</p>
+						<p>Not Begin <a class="timeUpdate" href="#">-> Begin Now</a></p>
+					{% else %} {# Si la tâche est non commencée #}
+						<p>Began the: {{task.getDateStarted()|date('m/d/Y H:i')}}</p>
 					{% endif %}
-					<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
+					{# Si la tâche est terminée #}
+					{% if task.getDateCompleted() != null %}
+						<p>Finished the : {{task.getDateCompleted()|date('m/d/Y H:i')}}</p>
+					{% else %}	{# Si la tâche n'est pas terminée #}
+						{# Si la tâche a une date de fin encore valide #}
+						{% if task.getDueDate() > "now"|date("m/d/Y H:i") %}
+							{# Si la tâche a été commencé on propose de la finir #}
+							{% if task.getDateStarted() != null %}
+								<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}} | <a class="timeUpdate" href="#" >Finish Now</a></p>
+							{% else %}	{# Sinon non #}
+								<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
+							{% endif %}
+						{% else %}	{# Si la tâche est expirée sans avoir été finie #}
+							<p>Deadtime reach !</p>
+						{% endif %}
+					{% endif %}
 				</div>
 				<div class="descriptionTask">
 					<p>{{task.getDescription()}}</p>
