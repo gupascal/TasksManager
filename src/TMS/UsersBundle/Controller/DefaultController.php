@@ -22,12 +22,12 @@ class DefaultController extends Controller
 		
 		$signup_form->handleRequest($this->getRequest());
 		
-		$isRegistratedUser = false;
+		$isNotRegistratedUser = true;
 		$registrationSucceded = false;
 		if ($signup_form->isValid()) {
 			$user = $signup_form->getData();
-			$isRegistratedUser = $em->getRepository('TMSUsersBundle:User')->isNotRegistratedUser($user);
-			if ($isRegistratedUser)
+			$isNotRegistratedUser = $em->getRepository('TMSUsersBundle:User')->isNotRegistratedUser($user);
+			if ($isNotRegistratedUser)
 			{
 				if ($signup_form['password_']->getData() && $signup_form['password_']->getData() == $user->getPassword())
 				{
@@ -45,7 +45,7 @@ class DefaultController extends Controller
 		
         return $this->render('TMSUsersBundle:Default:index.html.twig', array('signup_form' => $signup_form->createView(),
 																			 'form_submitted' => $signup_form->isValid(),
-																			 'username_or_email_already_used' => $isRegistratedUser,
+																			 'username_or_email_already_used' => !$isNotRegistratedUser,
 																			 'registration_succeded' => $registrationSucceded));
     }
 	
