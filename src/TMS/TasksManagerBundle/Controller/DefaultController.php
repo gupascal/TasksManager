@@ -219,14 +219,17 @@ class DefaultController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
 		
+		$deps_list = array();
 		foreach ($new_deps as $new_dep) {
-			$task->addDepTask($em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $new_dep));
+			$dep = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $new_dep);
+			$deps_list[] = json_encode($dep);
+			$task->addDepTask($dep);
 		}
 		
 		$em->persist($task);
 		$em->flush();
 		
-		$response = array('taskid' => $id, 'deps' => $deps);
+		$response = array('taskid' => $id, 'deps' => $deps_list);
 		return new Response(json_encode($response)); 
 	}
 	
