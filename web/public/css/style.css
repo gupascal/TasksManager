@@ -22,6 +22,14 @@ a {
 	font-weight: bold;
 }
 
+.infosTask p {
+	width: 100%;
+	max-width: 280px;
+	overflow: auto;
+	height: 20px;
+	max-height: 20px;
+}
+
 p {
 	margin: 5px 0;
 }
