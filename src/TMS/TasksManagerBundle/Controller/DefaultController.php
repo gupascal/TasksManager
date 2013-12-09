@@ -86,6 +86,50 @@ class DefaultController extends Controller
 		return $this->render('TMSTasksManagerBundle:Default:edit.html.twig', array('edit_form' => $edit_form->createView()));
 	}
 	
+	public function startTaskAction()
+	{
+		$request = $this->container->get('request');
+		
+		if(!$request->isXmlHttpRequest()) {
+			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
+		}
+		
+		$id = (int)$request->request->get('taskid');
+	
+		$user = $this->getUser();
+	
+		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
+		$task->setDateStarted(new \DateTime("now"));
+		$em->persist($task);
+		$em->flush();
+		
+		$response = array('taskid' => $id, 'date_started' => $task->getDateStarted());
+		return new Response(json_encode($response));
+	}
+	
+	public function completeTaskAction()
+	{
+		$request = $this->container->get('request');
+		
+		if(!$request->isXmlHttpRequest()) {
+			return $this->redirect($this->generateUrl('tms_tasks_manager_homepage'));
+		}
+		
+		$id = (int)$request->request->get('taskid');
+	
+		$user = $this->getUser();
+	
+		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
+		if ($task->getDateStarted() !== null) {
+			$task->setDateCompleted(new \DateTime("now"));
+		}
+		$em->persist($task);
+		$em->flush();
+		
+		$response = array('taskid' => $id, 'date_completed' => $task->getDateCompleted());
+		return new Response(json_encode($response));
+	}
+	
 	public function deleteAction($taskid)
 	{
 		$user = $this->getUser();

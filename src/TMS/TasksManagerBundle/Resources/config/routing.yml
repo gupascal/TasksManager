@@ -18,6 +18,14 @@ tms_tasks_manager_edit:
     requirements:
         taskid:  \d+
 
+tms_tasks_manager_start_task:
+    pattern:  /tasks/start
+    defaults: { _controller: TMSTasksManagerBundle:Default:startTask }
+
+tms_tasks_manager_complete_task:
+    pattern:  /tasks/complete
+    defaults: { _controller: TMSTasksManagerBundle:Default:completeTask }
+
 tms_tasks_manager_delete:
     pattern:  /tasks/{taskid}/delete
     defaults: { _controller: TMSTasksManagerBundle:Default:delete }
