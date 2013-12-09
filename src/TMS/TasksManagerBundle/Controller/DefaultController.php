@@ -6,16 +6,42 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use TMS\TasksManagerBundle\Entity\Task;
 use TMS\TasksManagerBundle\Form\Type\CreateTaskType;
+use TMS\TasksManagerBundle\Form\Type\TaskFiltersType;
 
 class DefaultController extends Controller
 {
+	/****************************************************************************************************************************
+	* Task management functions.
+	****************************************************************************************************************************/
+
     public function indexAction()
     {
 		$user = $this->getUser();
 	
 		$tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findAllRunningTasksOrderedByDueDate($user->getUsername());
 		
-        return $this->render('TMSTasksManagerBundle:Default:index.html.twig', array('tasks' => $tasks));
+		$filters_form = $this->createForm(new TaskFiltersType());
+		
+		$filters_form->handleRequest($this->getRequest());
+		
+		if ($filters_form->isValid())
+		{
+			$filters = $filters_form->getData();
+		
+			$em = $this->getDoctrine()->getManager();
+			$qb = $em->getRepository('TMSTasksManagerBundle:Task')->createQueryBuilder('t');
+			
+			$qb->innerJoin('TMS\UsersBundle\Entity\User', 'u', Join::WITH, 't.user = u.id')
+				->andWhere('u.username = :username')
+				->setParameter('username', $user->getUsername());
+			
+			$qb->andWhere('t.name LIKE :name')
+				->setParameter('username', '%'.$filters['name'].'%');
+				
+			$tasks = $qb->getQuery()->getResult();
+		}
+		
+        return $this->render('TMSTasksManagerBundle:Default:index.html.twig', array('filters_form' => $filters_form->createView(), 'tasks' => $tasks));
     }
 	
 	public function showAction($taskid)
@@ -146,6 +172,10 @@ class DefaultController extends Controller
 	}
 	
 	
+	/****************************************************************************************************************************
+	* Task dependancies management functions.
+	****************************************************************************************************************************/
+	
 	public function addDependenciesFormAction()
 	{
 		$request = $this->container->get('request');
@@ -219,5 +249,13 @@ class DefaultController extends Controller
 		
 		$response = array('taskid' => $id);
 		return new Response(json_encode($response));
+	}
+	
+	
+	/****************************************************************************************************************************
+	* Filters management functions
+	****************************************************************************************************************************/
+	public function filterAction()
+	{
 	}
 }
