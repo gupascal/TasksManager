@@ -21,10 +21,14 @@ tms_tasks_manager_edit:
 tms_tasks_manager_start_task:
     pattern:  /tasks/start
     defaults: { _controller: TMSTasksManagerBundle:Default:startTask }
+    requirements:
+        _method: POST
 
 tms_tasks_manager_complete_task:
     pattern:  /tasks/complete
     defaults: { _controller: TMSTasksManagerBundle:Default:completeTask }
+    requirements:
+        _method: POST
 
 tms_tasks_manager_delete:
     pattern:  /tasks/{taskid}/delete

@@ -123,8 +123,9 @@ class DefaultController extends Controller
 		$id = (int)$request->request->get('taskid');
 	
 		$user = $this->getUser();
-	
-		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
+		$em = $this->getDoctrine()->getManager();
+		
+		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
 		$task->setDateStarted(new \DateTime("now"));
 		$em->persist($task);
 		$em->flush();
@@ -144,8 +145,9 @@ class DefaultController extends Controller
 		$id = (int)$request->request->get('taskid');
 	
 		$user = $this->getUser();
+		$em = $this->getDoctrine()->getManager();
 	
-		$task = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
+		$task = $em->getRepository('TMSTasksManagerBundle:Task')->findUserTask($user->getUsername(), $id);
 		if ($task->getDateStarted() !== null) {
 			$task->setDateCompleted(new \DateTime("now"));
 		}
