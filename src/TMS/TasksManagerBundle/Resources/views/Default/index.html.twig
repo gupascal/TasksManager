@@ -28,7 +28,7 @@
 					<p>Priority: {{task.getPriority()}}</p>
 					{# Si la tâche est commencée #}
 					{% if task.getDateStarted() == null %}
-						<p>Not Begin <a class="timeUpdate" href="#">-> Begin Now</a></p>
+						<p>Not Begin <a class="timeUpdate startTask" id="start_{{ task.getId() }}" href="{{ path('tms_tasks_manager_start_task')}}" >-> Begin Now</a></p>
 					{% else %} {# Si la tâche est non commencée #}
 						<p>Began the: {{task.getDateStarted()|date('m/d/Y H:i')}}</p>
 					{% endif %}
@@ -40,7 +40,7 @@
 						{% if task.getDueDate() > "now"|date("m/d/Y H:i") %}
 							{# Si la tâche a été commencé on propose de la finir #}
 							{% if task.getDateStarted() != null %}
-								<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}} | <a class="timeUpdate" href="#" >Finish Now</a></p>
+								<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}} | <a class="timeUpdate finishTask" id="finish_{{ task.getId() }}" href="{{ path('tms_tasks_manager_complete_task')}}" >Finish Now</a></p>
 							{% else %}	{# Sinon non #}
 								<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
 							{% endif %}

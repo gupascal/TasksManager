@@ -9,7 +9,7 @@ for (var i = 0 ; i < aAddDeps.length ; i++)
 
 function addDeps(e)
 {
-	e.preventDefault();	// On bloque l'action par défaut de cet élément
+	e.preventDefault();
 	var targ = getTarget(e);
 	// Envoi un formulaire post vers le lien tms_tasks_manager_add_dep_form
 	// Avec le parametre taskid
@@ -110,6 +110,7 @@ function destroyPopUpAddDepsTask()
 
 function addTasksToDB(e)
 {
+	e.preventDefault();
 	// Récupère l'id de la tache à laquelle on ajoute des dépendances
    var idTask = document.getElementById('taskAsker');
    // Récupère les options du formulaire d'ajout de dépendance
@@ -134,6 +135,7 @@ function addTasksToDB(e)
 
 function addDepsInList(answer)
 {
+	alert("ajouté");
 	// Détruit la PopUp
 	destroyPopUpAddDepsTask();
 }
