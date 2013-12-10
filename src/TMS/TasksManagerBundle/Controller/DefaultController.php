@@ -253,7 +253,7 @@ class DefaultController extends Controller
 		$em->persist($task);
 		$em->flush();
 		
-		$response = array('taskid' => $id);
+		$response = array('taskid' => $id, 'dep_id' => $dep_id);
 		return new Response(json_encode($response));
 	}
 	

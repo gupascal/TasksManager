@@ -15,7 +15,7 @@ function finishTask(e)
 
 	// Envoi un formulaire post vers le lien tms_tasks_manager_remove_dep
 	// Avec les parametres 	taskid (id tache que l'on finit)
-	// Appel la methode todoOnAnswer3 lors de la réponse
+	// Appel la methode replacDateCompleted lors de la réponse
 	// type de réponse : json
 	$.post(finishTaskLink,               
 		  { taskid: idTask[1]},
@@ -25,10 +25,10 @@ function finishTask(e)
 
 function replacDateCompleted(answer)
 {
-	if (answer.taskid == null && answer.date_completed == null)
+	if (answer.taskid == null || answer.date_completed == null)
 		return;
 		
-	// Construit l'id du lien qui a demandé à commencer la tache
+	// Construit l'id du lien qui a demandé à terminer la tache
 	// Pour ensuite récupérer la balise parente et remplacer son contenu
 	var idElementToReplace = String('#finish_' + answer.taskid);
 	
