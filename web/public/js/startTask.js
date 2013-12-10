@@ -25,9 +25,9 @@ function startTask(e)
 
 function replacDateStarted(answer)
 {
-	if (answer.taskid != null && answer.date_started != null)
+	if (answer.taskid == null && answer.date_started == null)
 		return;
-		
+	
 	// Construit l'id du lien qui a demandé à commencer la tache
 	// Pour ensuite récupérer la balise parente et remplacer son contenu
 	var idElementToReplace = String('#start_' + answer.taskid);

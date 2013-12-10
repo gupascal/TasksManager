@@ -26,7 +26,7 @@
 						{% endif %}
 						{# Si la tâche est terminée #}
 						{% if task.getDateCompleted() != null %}
-							<p>Finished the : {{task.getDateCompleted()|date('m/d/Y H:i')}}</p>
+							<p>Finished the: {{task.getDateCompleted()|date('m/d/Y H:i')}}</p>
 						{% else %}	{# Si la tâche n'est pas terminée #}
 							{# Si la tâche a une date de fin encore valide #}
 							{% if task.getDueDate() > "now"|date("m/d/Y H:i") %}
@@ -83,7 +83,7 @@
 							{% endif %}
 							{# Si la tâche est terminée #}
 							{% if task.getDateCompleted() != null %}
-								<p>Finished the : {{task.getDateCompleted()|date('m/d/Y H:i')}}</p>
+								<p>Finished the: {{task.getDateCompleted()|date('m/d/Y H:i')}}</p>
 							{% else %}	{# Si la tâche n'est pas terminée #}
 								{# Si la tâche a une date de fin encore valide #}
 								{% if task.getDueDate() > "now"|date("m/d/Y H:i") %}

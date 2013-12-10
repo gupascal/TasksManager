@@ -155,7 +155,7 @@ class DefaultController extends Controller
 		$em->persist($task);
 		$em->flush();
 		
-		$response = array('taskid' => $id, 'date_completed' => $task->getDateCompleted());
+		$response = array('taskid' => $id, 'date_completed' => json_encode($task->getDateCompleted()->format('m/d/Y H:i')));
 		return new Response(json_encode($response));
 	}
 	

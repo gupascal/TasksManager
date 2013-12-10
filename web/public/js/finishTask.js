@@ -19,11 +19,25 @@ function finishTask(e)
 	// type de réponse : json
 	$.post(finishTaskLink,               
 		  { taskid: idTask[1]},
-		  todoOnAnswer3,
+		  replacDateCompleted,
 		  "json");
 }
 
-function todoOnAnswer3(answer)
+function replacDateCompleted(answer)
 {
-	alert("task finished");
+	if (answer.taskid == null && answer.date_completed == null)
+		return;
+		
+	// Construit l'id du lien qui a demandé à commencer la tache
+	// Pour ensuite récupérer la balise parente et remplacer son contenu
+	var idElementToReplace = String('#finish_' + answer.taskid);
+	
+	// Déserialize le tableau reçu
+	var task_date_deserialise = JSON.parse(answer.date_completed);
+	
+	// Texte qui va remplacer l'ancien texte
+	var txtReplace = "Finished the: " + task_date_deserialise;
+	
+	// Remplace par le nouveau bon texte avec la date mise à jour
+	$(idElementToReplace).parent().html(txtReplace);
 }
