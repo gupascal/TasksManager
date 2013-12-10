@@ -19,9 +19,14 @@ header, footer {
 #filters {
 	background: #cadaf6;
 	border-bottom: 1px solid #aeaeae;
-	height: 60px;
-	padding-left: 10px;
+	height: 190px;
+	padding-left: 20px;
 	border-radius: 10px 10px 0 0;
+}
+
+#filters p {
+	margin: 0;
+	padding: 5px 0;
 }
 
 section {
@@ -30,4 +35,33 @@ section {
 
 #main .links {
 	padding-left: 10px;
+}
+
+#filterName, #filterPriority, #filterDueDate {
+	height: 40px;
+}
+
+#filterName {
+	padding-top: 10px;
+}
+
+#filterName div, #filterPriority  div, #filterDueDate div {
+	float: left;
+}
+
+input[type="text"] {
+	height: 20px;
+}
+
+#task_filters_due_date, input[type="text"] {
+	margin-left: 5px;
+}
+
+button {
+	background: linear-gradient(to bottom, #2CC321 0%, #59A540 100%) repeat scroll 0 0 #2CC321;
+    border: medium none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px #A5A5A5;
+    color: #FFFFFF;
+    font-weight: bold;
 }

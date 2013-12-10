@@ -10,7 +10,23 @@
 	
 {% block content %}
 	<div id="filters">
-		Filtres de tri
+		<p>Filters:</p>
+		{{ form_start(filters_form) }}
+			{{ form_errors(filters_form) }}
+			<div id="filterName" >
+				{{ form_row(filters_form.name_filter, { 'label': 'Name:' }) }}
+				{{ form_row(filters_form.name, { 'label': ' ' }) }}
+			</div>
+			<div id="filterPriority" >
+				{{ form_row(filters_form.priority_filter, { 'label': 'Priority:' }) }}
+				{{ form_row(filters_form.priority, { 'label': ' ' }) }}
+			</div>
+			<div id="filterDueDate" >
+				{{ form_row(filters_form.due_date_filter, { 'label': 'Due Date:' }) }}
+				{{ form_row(filters_form.due_date, { 'label': ' ' }) }}
+			</div>
+			{{ form_row(filters_form.submit) }}
+		{{ form_end(filters_form) }}
 	</div>
 	<p><a class="links" href="{{ path('tms_tasks_manager_create') }}">Create a new Task</a></p>
 	<section>
