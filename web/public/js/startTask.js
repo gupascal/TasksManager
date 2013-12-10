@@ -15,15 +15,29 @@ function startTask(e)
 
 	// Envoi un formulaire post vers le lien tms_tasks_manager_remove_dep
 	// Avec les parametres 	taskid (id tache que l'on commence)
-	// Appel la methode todoOnAnswer2 lors de la réponse
+	// Appel la methode replacDateStarted lors de la réponse
 	// type de réponse : json
 	$.post(startTaskLink,               
 		  { taskid: idTask[1]},
-		  todoOnAnswer2,
+		  replacDateStarted,
 		  "json");
 }
 
-function todoOnAnswer2(answer)
+function replacDateStarted(answer)
 {
-	alert("task started");
+	if (answer.taskid != null && answer.date_started != null)
+		return;
+		
+	// Construit l'id du lien qui a demandé à commencer la tache
+	// Pour ensuite récupérer la balise parente et remplacer son contenu
+	var idElementToReplace = String('#start_' + answer.taskid);
+	
+	// Déserialize le tableau reçu
+	var task_date_deserialise = JSON.parse(answer.date_started);
+	
+	// Texte qui va remplacer l'ancien texte
+	var txtReplace = "Started the: " + task_date_deserialise;
+	
+	// Remplace par le nouveau bon texte avec la date mise à jour
+	$(idElementToReplace).parent().html(txtReplace);
 }

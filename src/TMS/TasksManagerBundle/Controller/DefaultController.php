@@ -3,6 +3,7 @@
 namespace TMS\TasksManagerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToArrayTransformer;
 use Symfony\Component\HttpFoundation\Response;
 use TMS\TasksManagerBundle\Entity\Task;
 use TMS\TasksManagerBundle\Form\Type\CreateTaskType;
@@ -130,7 +131,7 @@ class DefaultController extends Controller
 		$em->persist($task);
 		$em->flush();
 		
-		$response = array('taskid' => $id, 'date_started' => $task->getDateStarted());
+		$response = array('taskid' => $id, 'date_started' => json_encode($task->getDateStarted()->format('m/d/Y H:i')));
 		return new Response(json_encode($response));
 	}
 	
