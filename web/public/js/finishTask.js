@@ -27,7 +27,7 @@ function replacDateCompleted(answer)
 {
 	if (answer.taskid == null || answer.date_completed == null)
 		return;
-		
+	
 	// Construit l'id du lien qui a demandé à terminer la tache
 	// Pour ensuite récupérer la balise parente et remplacer son contenu
 	var idElementToReplace = String('#finish_' + answer.taskid);

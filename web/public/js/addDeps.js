@@ -123,7 +123,7 @@ function addTasksToDB(e)
 		if (tasks[i].selected)
 			arrayTask.push(tasks[i].value);
    }
-   
+
    // Envoi le formulaire au back-end pour l'ajouter à la DB
    	$.post(addDepsAction,               
 		  { taskid: idTask.innerHTML,
@@ -131,6 +131,8 @@ function addTasksToDB(e)
 			},
 		  addDepsInList,
 		  "json");
+		  
+	alert("envoyé");
 }
 
 function addDepsInList(answer)

@@ -38,6 +38,18 @@ function replacDateStarted(answer)
 	// Texte qui va remplacer l'ancien texte
 	var txtReplace = "Started the: " + task_date_deserialise;
 	
+	// Paragraphe de la date de départ de la tâche
+	var elementDateStarted = $(idElementToReplace).parent();
+	
 	// Remplace par le nouveau bon texte avec la date mise à jour
-	$(idElementToReplace).parent().html(txtReplace);
+	elementDateStarted.html(txtReplace);
+	
+	// On va modifier le p de la date de fin pour ajouter un lien pour terminer la tâche
+	// Paragraphe suivant de celui de la date de départ
+	var idFinishLink = String('finish_' + answer.taskid);	// Id du lien
+	elementDateStarted.next().append(' | <a id="' + idFinishLink + '" class="timeUpdate finishTask" href="#">Finish</a>');
+	
+	// Une fois le lien ajouté, il faut lui ajouter l'évènement dessus pour finir la tâche dessus
+	var aStartDeps = document.getElementById(idFinishLink);
+	addEvent(aStartDeps, 'click', finishTask);
 }

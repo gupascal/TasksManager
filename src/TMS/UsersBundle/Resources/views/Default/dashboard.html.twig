@@ -32,7 +32,7 @@
 							{% if task.getDueDate() > "now"|date("m/d/Y H:i") %}
 								{# Si la tâche a été commencé on propose de la finir #}
 								{% if task.getDateStarted() != null %}
-									<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}} | <a class="timeUpdate finishTask" id="finish_{{ task.getId() }}" href="#" >Finish Now</a></p>
+									<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}} | <a class="timeUpdate finishTask" id="finish_{{ task.getId() }}" href="#" >Finish</a></p>
 								{% else %}	{# Sinon non #}
 									<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
 								{% endif %}
@@ -89,7 +89,7 @@
 								{% if task.getDueDate() > "now"|date("m/d/Y H:i") %}
 									{# Si la tâche a été commencé on propose de la finir #}
 									{% if task.getDateStarted() != null %}
-										<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}} | <a class="timeUpdate finishTask" id="finish_{{ task.getId() }}" href="#" >Finish Now</a></p>
+										<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}} | <a class="timeUpdate finishTask" id="finish_{{ task.getId() }}" href="#" >Finish</a></p>
 									{% else %}	{# Sinon non #}
 										<p>To finish for: {{task.getDueDate()|date('m/d/Y H:i')}}</p>
 									{% endif %}
