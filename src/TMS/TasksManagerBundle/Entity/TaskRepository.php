@@ -133,6 +133,7 @@ class TaskRepository extends EntityRepository
 		$this->whereUserIs($qb, $username);
 		return $qb->andWhere('t.due_date < :dueDate')
 						->setParameter('dueDate', $task->getDueDate())
+						->andWhere('t.id != ALL (SELECT dt.id FROM TMS\TasksManagerBundle\Entity\Task t_ INNER JOIN t_.dep_tasks dt WHERE t_.id = '.(int)$task->getId().')')
 						->getQuery()
 						->getResult();
 	}
