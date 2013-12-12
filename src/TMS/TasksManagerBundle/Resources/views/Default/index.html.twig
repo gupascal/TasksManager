@@ -38,7 +38,7 @@
 			{% endif %}
 		{% endif %}
 		{% for task in tasks %}
-			<div class="task">
+			<div class="task" id="task_{{ task.getId() }}" >
 				<div class="infosTask">
 					<p><a class="showLink" href="{{ path('tms_tasks_manager_show', { 'taskid': task.getId() }) }}">{{task.getName()}}</a></p>
 					<p>Priority: {{task.getPriority()}}</p>
@@ -85,7 +85,7 @@
 				</div>
 				<div class="actionTask">
 					<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>
-					<p><a class="links deleteBtn" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a></p>
+					<p><a class="links deleteBtn" id="delete_{{ task.getId() }}" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a></p>
 				</div>
 			</div>
 		{% endfor %}

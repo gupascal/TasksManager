@@ -29,10 +29,14 @@ function confirmDelete(e)
 	
 	var choice = document.createElement('p');
 	
+	var idTask = String(targ.id).split("_", 2);
+	
 	var acceptLink = document.createElement('a');
-    acceptLink.href  = targ;
+    acceptLink.href  = '#';
+	acceptLink.onclick = deleteTaskFromPage;
     acceptLink.title = 'Delete Task';
-	acceptLink.id = 'deleteTask';
+	acceptLink.className += ' deleteTaskLink';
+	acceptLink.id = 'deleteTask_' + idTask[1];
 	acceptLink.appendChild(textNodes[1]);
 	choice.appendChild(acceptLink);
 	
@@ -56,4 +60,26 @@ function destroyPopUpDeleteThisTask()
 	var popUp = document.getElementById("deletePopUp");
 
 	body.removeChild(popUp);
+}
+
+function deleteTaskFromPage(e)
+{
+	e.preventDefault();
+	var targ = getTarget(e);
+	// Id tâche à supprimer sur la page
+	var idTask = String(targ.id).split("_", 2);
+	
+	// URL pour supprimer la tâche récupérer grâce au lien de suppression de tâche
+	var urlDelete = document.getElementById('delete_' + idTask[1]);
+	
+	// Envoi la requête get pour supprimer la tâche
+	$.get(urlDelete.href,               
+		  { },
+		  null,
+		  "json");
+
+	// Supprime la div de la tâche
+	$('#task_' + idTask[1]).remove();
+	// Détruit la Popup
+	destroyPopUpDeleteThisTask();
 }

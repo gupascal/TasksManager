@@ -77,7 +77,7 @@ footer {
 	height: 40px;
 }
 
-#addDepsForm  form input[type="submit"], #deleteTask, .form button {
+#addDepsForm  form input[type="submit"], .deleteTaskLink, .form button {
 	background: #2CC321;
 	background-image: -o-linear-gradient(bottom, #2CC321 0%, #59A540 100%);
 	background-image: -moz-linear-gradient(bottom, #2CC321 0%, #59A540 100%);
