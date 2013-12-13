@@ -2,6 +2,7 @@
 
 namespace TMS\TasksManagerBundle\Controller;
 
+use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToArrayTransformer;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +38,7 @@ class DefaultController extends Controller
 				->setParameter('username', $user->getUsername());
 			
 			$qb->andWhere('t.name LIKE :name')
-				->setParameter('username', '%'.$filters['name'].'%');
+				->setParameter('name', '%'.$filters_form['name']->getData().'%');
 				
 			$tasks = $qb->getQuery()->getResult();
 		}
