@@ -37,9 +37,11 @@ class DefaultController extends Controller
 				->andWhere('u.username = :username')
 				->setParameter('username', $user->getUsername());
 			
+			// Name filter
 			$qb->andWhere('t.name LIKE :name')
 				->setParameter('name', '%'.$filters_form['name']->getData().'%');
 			
+			// Priority filter
 			$priority_filter = $filters_form['priority_filter']->getData();
 			$priority = $filters_form['priority']->getData();
 			if ($priority != "" || $priority === 0) {
@@ -50,6 +52,20 @@ class DefaultController extends Controller
 				else if ($priority_filter == "is_lower_than") {
 					$qb->andWhere('t.priority < :priority')
 						->setParameter('priority', $priority);
+				}
+			}
+			
+			// Due Date filter
+			$due_date_filter = $filters_form['due_date_filter']->getData();
+			$due_date = $filters_form['due_date']->getData();
+			if ($due_date != null) {
+				if ($due_date_filter == "is_newer_than") {
+					$qb->andWhere('t.due_date > :due_date')
+						->setParameter('due_date', $due_date);
+				}
+				else if ($due_date_filter == "is_older_than") {
+					$qb->andWhere('t.due_date < :due_date')
+						->setParameter('due_date', $due_date);
 				}
 			}
 				
