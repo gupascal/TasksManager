@@ -4,7 +4,6 @@ namespace TMS\TasksManagerBundle\Controller;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToArrayTransformer;
 use Symfony\Component\HttpFoundation\Response;
 use TMS\TasksManagerBundle\Entity\Task;
 use TMS\TasksManagerBundle\Form\Type\CreateTaskType;
