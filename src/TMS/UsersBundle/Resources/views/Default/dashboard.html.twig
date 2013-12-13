@@ -12,7 +12,7 @@
 	<p><a class="links" href="{{ path('tms_tasks_manager_create') }}">Create a new Task</a></p>
 	{% if next_tasks != null %}
 		<section>
-			<p>Next 5 Tasks :</p>
+			<h2>Next 5 Tasks :</h2>
 			{% for task in next_tasks %}
 				<div class="task" id="task_{{ task.getId() }}" >
 					<div class="infosTask">
@@ -69,7 +69,7 @@
 	{% endif %}
 	{% if tasks_in_progress != null %}
 		<section>
-			<p>5 Tasks in progress :</p>
+			<h2>5 Tasks in progress :</h2>
 			{% for task in tasks_in_progress %}
 				<div class="task" id="task_{{ task.getId() }}" >
 						<div class="infosTask">

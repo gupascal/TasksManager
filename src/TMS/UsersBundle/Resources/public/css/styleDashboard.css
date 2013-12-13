@@ -17,6 +17,10 @@ header, footer {
 	padding: 0 10px;
 }
 
+h2 {
+	margin: 5px 0;
+}
+
 #filters {
 	background: #cadaf6;
 	border-bottom: 1px solid #aeaeae;
