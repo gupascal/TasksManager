@@ -13,10 +13,6 @@ class CreateTaskType extends AbstractType
 				->add('priority', 'number')
 				->add('due_date', 'datetime')
 				->add('description', 'textarea')
-				// ->add('dep_tasks', 'entity', array('class' => 'TMSTasksManagerBundle:Task',
-												// 'property' => 'name',
-												// 'multiple' => true,
-												// /*'expanded' => true*/))
 				->add('submit', 'submit');
     }
 
