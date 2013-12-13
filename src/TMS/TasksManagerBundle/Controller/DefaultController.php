@@ -28,7 +28,7 @@ class DefaultController extends Controller
 		
 		if ($filters_form->isValid())
 		{
-			$filters = $filters_form->getData();
+			//$filters = $filters_form->getData();
 		
 			$em = $this->getDoctrine()->getManager();
 			$qb = $em->getRepository('TMSTasksManagerBundle:Task')->createQueryBuilder('t');
@@ -39,6 +39,19 @@ class DefaultController extends Controller
 			
 			$qb->andWhere('t.name LIKE :name')
 				->setParameter('name', '%'.$filters_form['name']->getData().'%');
+			
+			$priority_filter = $filters_form['priority_filter']->getData();
+			$priority = $filters_form['priority']->getData();
+			if ($priority != "" || $priority === 0) {
+				if ($priority_filter == "is_greater_than") {
+					$qb->andWhere('t.priority > :priority')
+						->setParameter('priority', $priority);
+				}
+				else if ($priority_filter == "is_lower_than") {
+					$qb->andWhere('t.priority < :priority')
+						->setParameter('priority', $priority);
+				}
+			}
 				
 			$tasks = $qb->getQuery()->getResult();
 		}
