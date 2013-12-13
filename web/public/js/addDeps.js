@@ -60,6 +60,7 @@ function showFormAddDeps(answer)
 		// Cré une option au select
 		var optionTask = document.createElement('option');
 		optionTask.value = task_deserialise.id;
+		optionTask.className = 'depOption';
 		optionTask.appendChild( document.createTextNode( task_deserialise.name ) );
 		
 		// Ajoute l'option au select
@@ -120,10 +121,10 @@ function addTasksToDB(e)
    var arrayTask = new Array();
    for (var i = 0 ; i < tasks.length ; i++)
    {
-		if (tasks[i].selected)
+		if (tasks[i].selected && tasks[i].classList.contains('depOption'))
 			arrayTask.push(tasks[i].value);
    }
-
+   
    // Envoi le formulaire au back-end pour l'ajouter à la DB
    	$.post(addDepsAction,               
 		  { taskid: idTask.innerHTML,
@@ -131,13 +132,10 @@ function addTasksToDB(e)
 			},
 		  addDepsInList,
 		  "json");
-		  
-	alert("envoyé");
 }
 
 function addDepsInList(answer)
 {
-	alert("ajouté");
 	// Détruit la PopUp
 	destroyPopUpAddDepsTask();
 }
