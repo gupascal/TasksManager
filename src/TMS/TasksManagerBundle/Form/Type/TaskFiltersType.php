@@ -10,7 +10,10 @@ class TaskFiltersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name_filter', 'choice', array("mapped" => false,
-													 'choices' => array('contains' => 'contains')))
+													 'choices' => array('contains' => 'contains',
+																		'does_not_contain' => 'doesn\'t contain',
+																		'begins_with' => 'begins with',
+																		'ends_with' => 'ends with')))
 				->add('name', 'text', array("mapped" => false,
 											'required' => false))
 				->add('priority_filter', 'choice', array("mapped" => false,
