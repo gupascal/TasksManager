@@ -10,7 +10,7 @@ class CreateTaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', 'text')
-				->add('priority', 'number')
+				->add('priority', 'choice', array('choices' => Task::getPriorities()))
 				->add('due_date', 'datetime')
 				->add('description', 'textarea')
 				->add('submit', 'submit');

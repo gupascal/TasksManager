@@ -26,6 +26,7 @@ class Task implements JsonSerializable
 	
 	/**
 	 * @ORM\Column(type="smallint")
+	 * @Assert\Choice(callback = "getPriorities")
 	 */
 	protected $priority;
 	
@@ -83,6 +84,14 @@ class Task implements JsonSerializable
 			'date_completed'=> $this->date_completed
         );
     }
+	
+	
+	public static function getPriorities()
+    {
+		return array("10" => 10, "9" => 9, "8" => 8, "7" => 7, "6" => 6, "5" => 5, "4" => 4, "3" => 3, "2" => 2, "1" => 1,
+					 "0" => 0, "-1" => -1, "-2" => -2, "-3" => -3, "-4" => -4, "-5" => -5, "-6" => -6, "-7" => -7, "-8" => -8, "-9" => -9, "-10" => -10);
+	}
+	
 
     /**
      * Get id
@@ -260,6 +269,7 @@ class Task implements JsonSerializable
      */
     public function __construct()
     {
+		$this->priority = 0;
 		$this->due_date = new \DateTime("tomorrow");
 	
         $this->dep_tasks = new \Doctrine\Common\Collections\ArrayCollection();
