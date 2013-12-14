@@ -10,7 +10,7 @@
 	
 {% block content %}
 	<div id="filters">
-		<p>Filters:</p>
+		<h3>Filters:</h3>
 		{{ form_start(filters_form) }}
 			{{ form_errors(filters_form) }}
 			<div id="filterName" >
@@ -28,15 +28,8 @@
 			{{ form_row(filters_form.submit) }}
 		{{ form_end(filters_form) }}
 	</div>
-	<p><a class="links" href="{{ path('tms_tasks_manager_create') }}">Create a new Task</a></p>
+	<h3><a class="links" href="{{ path('tms_tasks_manager_create') }}">Create a new Task</a></h3>
 	<section>
-		{% if tasks != null %}
-			{% if tasks|length != 1 %}
-				<p>Tasks :</p>
-			{% else %}
-				<p>Task :</p>
-			{% endif %}
-		{% endif %}
 		{% for task in tasks %}
 			<div class="task" id="task_{{ task.getId() }}" >
 				<div class="infosTask">
@@ -44,7 +37,7 @@
 					<p>Priority: {{task.getPriority()}}</p>
 					{# Si la tâche est commencée #}
 					{% if task.getDateStarted() == null %}
-						<p>Not Started yet <a class="timeUpdate startTask" id="start_{{ task.getId() }}" href="#" >-> Begin Now</a></p>
+						<p>Not Started yet | <a class="timeUpdate startTask" id="start_{{ task.getId() }}" href="#" >Begin Now</a></p>
 					{% else %} {# Si la tâche est non commencée #}
 						<p>Started the: {{task.getDateStarted()|date('m/d/Y H:i')}}</p>
 					{% endif %}
@@ -77,15 +70,15 @@
 									<a class="removeDeps" id="{{ task.getId() }}_{{ depTask.getId() }}" href="#">
 										<img alt="delete cross" src="{{ asset('public/images/delete.png') }}"/>
 									</a> 
-									{{depTask.getName()}}
+									<a href="{{ path('tms_tasks_manager_show', { 'taskid': depTask.getId() }) }}">{{depTask.getName()}}</a>
 								</p>
 							{% endfor %}
 						</div>
 					{% endif %}
 				</div>
 				<div class="actionTask">
-					<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit this Task</a></p>
-					<p><a class="links deleteBtn" id="delete_{{ task.getId() }}" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete this Task</a></p>
+					<p><a class="links" href="{{ path('tms_tasks_manager_edit', { 'taskid': task.getId() }) }}">Edit</a></p>
+					<p><a class="links deleteBtn" id="delete_{{ task.getId() }}" href="{{ path('tms_tasks_manager_delete', { 'taskid': task.getId() }) }}">Delete</a></p>
 				</div>
 			</div>
 		{% endfor %}
