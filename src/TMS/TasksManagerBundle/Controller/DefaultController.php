@@ -43,14 +43,14 @@ class DefaultController extends Controller
 			// Priority filter
 			$priority_filter = $filters_form['priority_filter']->getData();
 			$priority = $filters_form['priority']->getData();
-			if ($priority != "" || $priority === 0) {
+			if (array_key_exists($priority, Task::getPriorities())) {
 				if ($priority_filter == "is_greater_than") {
 					$qb->andWhere('t.priority > :priority')
-						->setParameter('priority', $priority);
+						->setParameter('priority', Task::getPriorities()[$priority]);
 				}
 				else if ($priority_filter == "is_lower_than") {
 					$qb->andWhere('t.priority < :priority')
-						->setParameter('priority', $priority);
+						->setParameter('priority', Task::getPriorities()[$priority]);
 				}
 			}
 			
