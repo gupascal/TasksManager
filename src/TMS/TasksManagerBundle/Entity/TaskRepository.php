@@ -137,4 +137,82 @@ class TaskRepository extends EntityRepository
 						->getQuery()
 						->getResult();
 	}
+	
+	public function findFilteredTasks($username, \Symfony\Component\Form\Form /* TaskFiltersType */ $filters_form)
+	{
+		if (!$filters_form->isValid()) {
+			return $this->findAllRunningTasksOrderedByDueDate($username);
+		}
+	
+		$qb = $this->createQueryBuilder('t');
+
+		$this->whereUserIs($qb, $username);
+		
+		// Name filter
+		$name_filter = $filters_form['name_filter']->getData();
+		$name = $filters_form['name']->getData();
+		if ($name != null)
+		{
+			if ($name_filter == "contains") {
+				$qb->andWhere('t.name LIKE :name')
+					->setParameter('name', '%'.$name.'%');
+			}
+			else if ($name_filter == "does_not_contain") {
+				$qb->andWhere('t.name NOT LIKE :name')
+					->setParameter('name', '%'.$name.'%');
+			}
+			else if ($name_filter == "begins_with") {
+				$qb->andWhere('t.name LIKE :name')
+					->setParameter('name', $name.'%');
+			}
+			else if ($name_filter == "ends_with") {
+				$qb->andWhere('t.name LIKE :name')
+					->setParameter('name', '%'.$name);
+			}
+		}
+		
+		// Priority filter
+		$priority_filter = $filters_form['priority_filter']->getData();
+		$priority = $filters_form['priority']->getData();
+		if (array_key_exists($priority, Task::getPriorities()))
+		{
+			if ($priority_filter == "is_greater_than") {
+				$qb->andWhere('t.priority > :priority')
+					->setParameter('priority', $priority);
+			}
+			else if ($priority_filter == "is_greater_or_equal_to") {
+				$qb->andWhere('t.priority >= :priority')
+					->setParameter('priority', $priority);
+			}
+			else if ($priority_filter == "is_equal_to") {
+				$qb->andWhere('t.priority = :priority')
+					->setParameter('priority', $priority);
+			}
+			else if ($priority_filter == "is_lower_or_equal_to") {
+				$qb->andWhere('t.priority <= :priority')
+					->setParameter('priority', $priority);
+			}
+			else if ($priority_filter == "is_lower_than") {
+				$qb->andWhere('t.priority < :priority')
+					->setParameter('priority', $priority);
+			}
+		}
+		
+		// Due Date filter
+		$due_date_filter = $filters_form['due_date_filter']->getData();
+		$due_date = $filters_form['due_date']->getData();
+		if ($due_date != null)
+		{
+			if ($due_date_filter == "is_newer_than") {
+				$qb->andWhere('t.due_date > :due_date')
+					->setParameter('due_date', $due_date);
+			}
+			else if ($due_date_filter == "is_older_than") {
+				$qb->andWhere('t.due_date < :due_date')
+					->setParameter('due_date', $due_date);
+			}
+		}
+		
+		return $qb->getQuery()->getResult();
+	}
 }

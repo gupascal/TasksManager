@@ -19,88 +19,11 @@ class DefaultController extends Controller
     {
 		$user = $this->getUser();
 	
-		$tasks = $this->getDoctrine()->getRepository('TMSTasksManagerBundle:Task')->findAllRunningTasksOrderedByDueDate($user->getUsername());
-		
 		$filters_form = $this->createForm(new TaskFiltersType());
-		
 		$filters_form->handleRequest($this->getRequest());
 		
-		if ($filters_form->isValid())
-		{
-			$em = $this->getDoctrine()->getManager();
-			$qb = $em->getRepository('TMSTasksManagerBundle:Task')->createQueryBuilder('t');
-			
-			$qb->innerJoin('TMS\UsersBundle\Entity\User', 'u', Join::WITH, 't.user = u.id')
-				->andWhere('u.username = :username')
-				->setParameter('username', $user->getUsername());
-			
-			// Name filter
-			$name_filter = $filters_form['name_filter']->getData();
-			$name = $filters_form['name']->getData();
-			if ($name != null)
-			{
-				if ($name_filter == "contains") {
-					$qb->andWhere('t.name LIKE :name')
-						->setParameter('name', '%'.$name.'%');
-				}
-				else if ($name_filter == "does_not_contain") {
-					$qb->andWhere('t.name NOT LIKE :name')
-						->setParameter('name', '%'.$name.'%');
-				}
-				else if ($name_filter == "begins_with") {
-					$qb->andWhere('t.name LIKE :name')
-						->setParameter('name', $name.'%');
-				}
-				else if ($name_filter == "ends_with") {
-					$qb->andWhere('t.name LIKE :name')
-						->setParameter('name', '%'.$name);
-				}
-			}
-			
-			// Priority filter
-			$priority_filter = $filters_form['priority_filter']->getData();
-			$priority = $filters_form['priority']->getData();
-			if (array_key_exists($priority, Task::getPriorities()))
-			{
-				if ($priority_filter == "is_greater_than") {
-					$qb->andWhere('t.priority > :priority')
-						->setParameter('priority', $priority);
-				}
-				else if ($priority_filter == "is_greater_or_equal_to") {
-					$qb->andWhere('t.priority >= :priority')
-						->setParameter('priority', $priority);
-				}
-				else if ($priority_filter == "is_equal_to") {
-					$qb->andWhere('t.priority = :priority')
-						->setParameter('priority', $priority);
-				}
-				else if ($priority_filter == "is_lower_or_equal_to") {
-					$qb->andWhere('t.priority <= :priority')
-						->setParameter('priority', $priority);
-				}
-				else if ($priority_filter == "is_lower_than") {
-					$qb->andWhere('t.priority < :priority')
-						->setParameter('priority', $priority);
-				}
-			}
-			
-			// Due Date filter
-			$due_date_filter = $filters_form['due_date_filter']->getData();
-			$due_date = $filters_form['due_date']->getData();
-			if ($due_date != null)
-			{
-				if ($due_date_filter == "is_newer_than") {
-					$qb->andWhere('t.due_date > :due_date')
-						->setParameter('due_date', $due_date);
-				}
-				else if ($due_date_filter == "is_older_than") {
-					$qb->andWhere('t.due_date < :due_date')
-						->setParameter('due_date', $due_date);
-				}
-			}
-				
-			$tasks = $qb->getQuery()->getResult();
-		}
+		$em = $this->getDoctrine()->getManager();
+		$tasks = $em->getRepository('TMSTasksManagerBundle:Task')->findFilteredTasks($user->getUsername(), $filters_form);
 		
         return $this->render('TMSTasksManagerBundle:Default:index.html.twig', array('filters_form' => $filters_form->createView(), 'tasks' => $tasks));
     }
