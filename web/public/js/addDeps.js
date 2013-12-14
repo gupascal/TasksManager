@@ -124,7 +124,7 @@ function addTasksToDB(e)
 		if (tasks[i].selected && tasks[i].classList.contains('depOption'))
 			arrayTask.push(tasks[i].value);
    }
-   
+
    // Envoi le formulaire au back-end pour l'ajouter à la DB
    	$.post(addDepsAction,               
 		  { taskid: idTask.innerHTML,
@@ -142,33 +142,55 @@ function addDepsInList(answer)
 	// Récupère la div des dépendances de la tâche avec l'id answer.taskid
 	var divDepsTask = $('#task_' + answer.taskid).children(".depTask");
 	
-	// Récupère la div de listage des tâches dépendantes
-	var divDepList = divDepsTask.children(".depList");
-	
-	// Test si la div de listage des dépendances existe
-	if(!divDepList.length)	// existe pas
+	if(divDepsTask.length)	// si existe on est soit sur la liste des taches, soit sur le dashboard
 	{
-		// Crée la div de listage des dépendances
-		divDepsTask.append('<div class="depList">')
-		// Récupère la balise de listage des dépendances puisque elle n'existait pas avant
-		divDepList = divDepsTask.children(".depList");
-	}
-	
-	// On va ajouter toute les dépendances voulues à la div de listage
-	for (var i = 0 ; i < answer.deps.length ; i++)
-	{
-		// Déserialize le tableau reçu
-		var task_deserialise = JSON.parse(answer.deps[i]);
+		// Récupère la div de listage des tâches dépendantes
+		var divDepList = divDepsTask.children(".depList");
 		
-		// Ajoute les informations désirées de la dépendance dans la liste des dépendances
-		divDepList.append('<p><a id="' + answer.taskid + '_' + task_deserialise.id + '" class="removeDeps" href="#"><img src="' + imgCrossDelete + '" alt="delete cross"></a>' + task_deserialise.name + '</p>');
-	
-		// Une fois le lien ajouté, il faut lui ajouter l'évènement dessus pour pouvoir la supprimer
-		var idDepAdded = String(answer.taskid + '_' + task_deserialise.id);	// Id du lien
-		var dep = document.getElementById(idDepAdded);
-		addEvent(dep, 'click', deleteDep);
+		// Test si la div de listage des dépendances existe
+		if(!divDepList.length)	// existe pas
+		{
+			// Crée la div de listage des dépendances
+			divDepsTask.append('<div class="depList">')
+			// Récupère la balise de listage des dépendances puisque elle n'existait pas avant
+			divDepList = divDepsTask.children(".depList");
+		}
+		addDepsToPage(answer.taskid, answer.deps, divDepList);
+	}
+	else	// on est sur la page show task
+	{
+		// Récupère la div des dépendances
+		var divDepsList = $('#depTaskList');
+		if (!divDepsList.length)	// si elle n'exitse pas on la crée
+		{
+			// Récupère la div parente pour l'affichage des taches dépendantes
+			var divDeps = $('#depTask');
+			divDeps.append('<p>Dependent task:</p>');
+			divDeps.append('<div id="depTaskList">');
+			
+			divDepsList = $('#depTaskList');
+		}
+		addDepsToPage(answer.taskid, answer.deps, divDepsList)
 	}
 	
 	// Détruit la PopUp
 	destroyPopUpAddDepsTask();
+}
+
+function addDepsToPage(taskid, deps, balise)
+{
+	// On va ajouter toute les dépendances voulues à la div de listage
+	for (var i = 0 ; i < deps.length ; i++)
+	{
+		// Déserialize le tableau reçu
+		var task_deserialise = JSON.parse(deps[i]);
+		
+		// Ajoute les informations désirées de la dépendance dans la liste des dépendances
+		balise.append('<p><a id="' + taskid + '_' + task_deserialise.id + '" class="removeDeps" href="#"><img src="' + imgCrossDelete + '" alt="delete cross"></a> ' + task_deserialise.name + '</p>');
+	
+		// Une fois le lien ajouté, il faut lui ajouter l'évènement dessus pour pouvoir la supprimer
+		var idDepAdded = String(taskid + '_' + task_deserialise.id);	// Id du lien
+		var dep = document.getElementById(idDepAdded);
+		addEvent(dep, 'click', deleteDep);
+	}
 }

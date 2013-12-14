@@ -34,17 +34,20 @@ function RemoveDepFromPage(answer)
 	// Construit l'id du lien qui a demandé à supprimer la dépendance
 	// Pour ensuite récupérer la balise parente et la supprimer
 	var idElementToDelete = String('#' + answer.taskid + '_' + answer.dep_id);
-	var divDeps = $(idElementToDelete).parent().parent();	// Div contenant les dépendances
+	var divDepsList = $(idElementToDelete).parent().parent();	// Div contenant les dépendances
 	
 	// Supprime la dépendance de la page
 	$(idElementToDelete).parent().remove();
 	
 	// On vérifie s'il reste encore d'autres dépendances dans la div
-	var length = $(divDeps).children().length;
+	var length = $(divDepsList).children().length;
 	
 	// S'il ne reste plus de dépendences on supprime la div des dépendances
 	if (length > 0)
 		return;
+	divDepsList.remove();
 	
-	divDeps.remove();
+	// Si on est sur la page show on supprime le paragraphe, sinon cela ne changera rien
+	var divDepsShow = $('#depTask');
+	divDepsShow.children().remove();
 }

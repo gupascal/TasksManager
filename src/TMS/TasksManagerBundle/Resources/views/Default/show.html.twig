@@ -61,7 +61,7 @@
 							<a class="removeDeps" id="{{ task.getId() }}_{{ depTask.getId() }}" href="#">
 								<img alt="delete cross" src="{{ asset('public/images/delete.png') }}"/>
 							</a> 
-							{{depTask.getName()}}
+							<a href="{{ path('tms_tasks_manager_show', { 'taskid': depTask.getId() }) }}">{{depTask.getName()}}</a>
 						</p>
 					{% endfor %}
 				</div>
