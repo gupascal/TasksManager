@@ -2,10 +2,12 @@ header p {
 	float: left;
 	display: inline-block;
 	margin: auto;
+	font-size:1.3em;
 }
 
 .logout {
 	float: right;
+	margin-left: 15px;
 }
 
 .logout a {
@@ -14,12 +16,14 @@ header p {
 }
 
 .logo {
-	width: 48%;
+	width: 45%;
 	text-align: center;
+	margin-top:-24px;
 }
 
 .username{
-	margin-left: 15px;
+    float: right;
+	font-weight: bold;
 }
 
 h3 {

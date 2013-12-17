@@ -7,7 +7,14 @@ header, footer {
     padding: 10px;
 	background: #d9e6ff;
 	border: 1px solid #b1cbff;
-	height: 80px;
+}
+
+header {
+height: 34px;
+}
+
+footer {
+height: 50px;
 }
 
 #main {
