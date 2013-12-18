@@ -10,6 +10,14 @@ header, footer {
 	height: 80px;
 }
 
+header {
+	height: 34px;
+}
+
+footer {
+	height: 50px;
+}
+
 #main {
 	background: #e5e5e5;
 	margin: 0 10px;

@@ -14,9 +14,13 @@ header, footer {
 	height: 80px;
 }
 
-/*#task_create_dep_tasks {
-	width: 200px;
-}*/
+header {
+	height: 34px;
+}
+
+footer {
+	height: 50px;
+}
 
 .form {
 	width: 400px;
